@@ -17,7 +17,7 @@ static void			init_specs(t_specs *specs)
 	specs->flags = 0;
 	specs->field_width = -1;
 	specs->precision = -1;
-	ft_bzero(specs->conversion, PRF_LEN_MAX_CONV);
+	ft_bzero(specs->conversion, PRF_LEN_MAX_CONV + 1);
 }
 
 int					ft_printf(const char *format, ...)
@@ -25,11 +25,13 @@ int					ft_printf(const char *format, ...)
 	t_prf			env;
 
 	env.format = format;
+	env.index = 0;
 	va_start(env.args, format);
-	ft_bzero(env.buff, BUFF_SIZE);
+	ft_bzero(env.buff, BUFF_SIZE + 1);
 	env.len_result = 0;
 	init_specs(&(env.cur_specs));
-	ft_putstr(format);
+	parsing_format(&env);
+	ft_putstr(env.buff);
 	va_end(env.args);
 	return (env.len_result);
 }

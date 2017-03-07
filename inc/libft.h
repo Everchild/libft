@@ -28,7 +28,7 @@ typedef enum		e_bool
 ** libprint
 */
 
-# define PRF_LEN_MAX_CONV 4
+# define PRF_LEN_MAX_CONV 3
 
 typedef enum		e_flag
 {
@@ -45,19 +45,27 @@ typedef struct		s_specs
 	t_flag			flags;
 	int				field_width;
 	int				precision;
-	char			conversion[PRF_LEN_MAX_CONV];
+	char			conversion[PRF_LEN_MAX_CONV + 1];
 }					t_specs;
 
 typedef struct		s_prf
 {
 	const char		*format;
+	size_t			index;
 	va_list			args;
-	char			buff[BUFF_SIZE];
+	char			buff[BUFF_SIZE + 1];
 	size_t			len_result;
 	t_specs			cur_specs;
 }					t_prf;
 
 int					ft_printf(const char *format, ...);
+void				parsing_format(t_prf *env);
+void				get_flag(t_prf *env);
+void				get_field_width(t_prf *env);
+void				get_precision(t_prf *env);
+void				get_conversion(t_prf *env);
+
+void				buff_handler(char *buff);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
