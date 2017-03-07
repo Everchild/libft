@@ -16,7 +16,11 @@
 # include <string.h>
 # include <stdarg.h>
 
-# define BUFF_SIZE 1024
+void				buff_handler(char *buff, int action, char *s);
+
+# define BUFF_SIZE 3
+# define FLUSH 1
+# define FILL 2
 
 typedef enum		e_bool
 {
@@ -40,6 +44,17 @@ typedef enum		e_flag
 	SPACE = 1 << 5
 }					t_flag;
 
+/*typedef struct      s_conversion
+{
+    char            *conv_list;
+    void            (*get_type)(t_prf);
+}                   t_conversion;
+
+static t_conversion             *conv = { {"chhdhhi", get_char },
+{},
+{}
+};*/
+
 typedef struct		s_specs
 {
 	t_flag			flags;
@@ -59,13 +74,12 @@ typedef struct		s_prf
 }					t_prf;
 
 int					ft_printf(const char *format, ...);
+void                init_specs(t_specs *specs);
 void				parsing_format(t_prf *env);
 void				get_flag(t_prf *env);
 void				get_field_width(t_prf *env);
 void				get_precision(t_prf *env);
 void				get_conversion(t_prf *env);
-
-void				buff_handler(char *buff);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
