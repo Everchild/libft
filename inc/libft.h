@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/04 19:00:52 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/11 14:01:05 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef enum		e_bool
 }					t_bool;
 
 /*
- ** libprint
- */
+** libprint
+*/
 
 # define PRF_LEN_MAX_CONV 3
 # define ALL_FORMATS "sSpdDioOuUxXcC"
@@ -80,7 +80,7 @@ typedef struct		s_prf
 	const char		*format;
 	size_t			index;
 	va_list			args;
-	char			*(buff[BUFF_SIZE + 1]);
+	char			*buff;
 	size_t			len_result;
 	t_specs			*cur_specs;
 }					t_prf;
@@ -128,8 +128,8 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putnbrbase_fd(int n, unsigned int base, int fd);
 
 /*
- ** liblist
- */
+** liblist
+*/
 
 typedef struct		s_node
 {

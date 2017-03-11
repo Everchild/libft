@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_convert_specs.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/11 13:42:36 by sbrochar          #+#    #+#             */
+/*   Updated: 2017/03/11 14:01:12 by sbrochar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libft.h>
 
 static t_conversion	*get_all_funcs(void)
@@ -33,7 +45,7 @@ void				convert_specs(t_prf *env)
 	ptr = NULL;
 	all_formats = get_all_funcs();
 	if (!*(env->cur_specs->conversion))
-		buff_handler(env->buff, FILL, "(error)");
+		buff_handler(&env->buff, FILL, "(error)");
 	else
 	{
 	i = 0;
@@ -51,6 +63,6 @@ void				convert_specs(t_prf *env)
 		i++;
 	}
 	if (!ptr)
-		buff_handler(env->buff, FILL, "(error)");
+		buff_handler(&env->buff, FILL, "(error)");
 	}
 }

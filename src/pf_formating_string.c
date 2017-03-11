@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_formating_string.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/11 13:42:42 by sbrochar          #+#    #+#             */
+/*   Updated: 2017/03/11 14:01:10 by sbrochar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libft.h>
 
 static void		    init_specs(t_specs *specs)
@@ -12,7 +24,7 @@ static void			handle_specs(t_prf *env)
 {
 	env->index++;
 	if (env->format[env->index] == '%')
-        buff_handler(env->buff, FILL, "%");
+        buff_handler(&env->buff, FILL, "%");
 	else
     {
         init_specs(env->cur_specs);
@@ -24,7 +36,7 @@ static void			handle_specs(t_prf *env)
     convert_specs(env);
 //	env->index++;
 }
-#include <stdio.h>
+
 void				formating_string(t_prf *env)
 {
 	size_t			save;
@@ -39,7 +51,7 @@ void				formating_string(t_prf *env)
 			env->index++;
 			to_copy++;
 		}
-		buff_handler(env->buff, FILL, ft_strsub(env->format, save, to_copy));
+		buff_handler(&(env->buff), FILL, ft_strsub(env->format, save, to_copy));
 		env->len_result += to_copy;
 		if (env->format[env->index] == '%')
 			handle_specs(env);
