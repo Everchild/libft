@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/11 14:01:05 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/11 17:37:32 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum		e_bool
 	FALSE,
 	TRUE
 }					t_bool;
-
+#include <stdio.h>
 /*
 ** libprint
 */
@@ -85,12 +85,12 @@ typedef struct		s_prf
 	t_specs			*cur_specs;
 }					t_prf;
 
-typedef struct      s_conversion
+typedef struct		s_conversion
 {
 	t_all_conv		conv;
 	char			*conv_list;
 	void			(*treat_type)(t_prf *);
-}                   t_conversion;
+}					t_conversion;
 
 int					ft_printf(const char *format, ...);
 void				get_flag(t_prf *env, t_specs *specs);
@@ -170,8 +170,8 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 /*
- ** libmem
- */
+** libmem
+*/
 
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
@@ -185,10 +185,9 @@ void				ft_memdel(void **ap);
 void				*ft_memdup(const void *s, size_t n);
 void				*ft_realloc(void *ptr, size_t size);
 
-
 /*
- ** libstr
- */
+** libstr
+*/
 
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s);
@@ -225,22 +224,22 @@ char				*ft_strndup(const char *s, size_t n);
 void				ft_strrev(char **s);
 
 /*
- ** libtab
- */
+** libtab
+*/
 
 char				**ft_tabdup(const char **tab);
 //void				ft_tabdel(char ***tab);
 
 /*
- ** libmath
- */
+** libmath
+*/
 
 long int			ft_abs(int n);
 long int			ft_pow(int n, int pow);
 
 /*
- ** others
- */
+** others
+*/
 
 void				ft_exit(char *str, int status);
 int					ft_isalpha(int c);
@@ -252,8 +251,8 @@ int					ft_toupper(int c);
 int					ft_tolower(int c);
 
 /*
- ** gnl
- */
+** gnl
+*/
 
 # define GNL_FIRST_CALL -3
 # define GNL_BUF_HAS_DATA -2

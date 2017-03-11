@@ -1,19 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_get_type1.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/11 14:05:37 by sbrochar          #+#    #+#             */
+/*   Updated: 2017/03/11 17:03:04 by sbrochar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libft.h>
 
 void				treat_char(t_prf *env)
 {
-/*	char			to_format;
+	char			to_format;
+	char			*result;
 
-	to_format = va_arg(env->args, char);*/
-	buff_handler(&env->buff, FILL, "(char)");
+	to_format = va_arg(env->args, int);
+	result = (char *)ft_memalloc(sizeof(char)* 2);
+	result[0] = to_format;
+	env->len_result += ft_strlen(result);
+	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
 }
 
 void				treat_charp(t_prf *env)
 {
-/*	char			*to_format;
+	char			*to_format;
 
-	to_format = va_arg(env->args, char *);*/
-	buff_handler(&env->buff, FILL, "(char *)");
+	to_format = va_arg(env->args, char *);
+	env->len_result += ft_strlen(to_format);
+	buff_handler(&env->buff, FILL, to_format);
 }
 
 void				treat_uchar(t_prf *env)
@@ -66,10 +84,12 @@ void				treat_ushort(t_prf *env)
 
 void				treat_int(t_prf *env)
 {
-/*	int				to_format;
+	int				to_format;
+	char			*result;
 
-	to_format = va_arg(env->args, int);*/
-	buff_handler(&env->buff, FILL, "(int)");
+	to_format = va_arg(env->args, int);
+	result = ft_itoa(to_format);
+	buff_handler(&env->buff, FILL, result);
 }
 
 void				treat_uint(t_prf *env)

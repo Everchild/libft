@@ -6,13 +6,13 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:42 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/11 14:01:10 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/11 17:37:30 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-static void		    init_specs(t_specs *specs)
+static void			init_specs(t_specs *specs)
 {
 	specs->flags = 0;
 	specs->field_width = -1;
@@ -24,17 +24,20 @@ static void			handle_specs(t_prf *env)
 {
 	env->index++;
 	if (env->format[env->index] == '%')
-        buff_handler(&env->buff, FILL, "%");
+	{
+		buff_handler(&env->buff, FILL, "%");
+		env->len_result++;
+		env->index++;
+	}
 	else
-    {
-        init_specs(env->cur_specs);
+	{
+		init_specs(env->cur_specs);
 		get_flag(env, env->cur_specs);
 		get_field_width(env, env->cur_specs);
-        get_precision(env, env->cur_specs);
+		get_precision(env, env->cur_specs);
 		get_conversion(env, env->cur_specs);
-    }
-    convert_specs(env);
-//	env->index++;
+		convert_specs(env);
+	}
 }
 
 void				formating_string(t_prf *env)
