@@ -12,25 +12,26 @@
 
 #include <libft.h>
 
-void			    init_specs(t_specs *specs)
+static void			init_env(t_prf *env, const char *format)
 {
-	specs->flags = 0;
-	specs->field_width = -1;
-	specs->precision = -1;
-	ft_bzero(specs->conversion, PRF_LEN_MAX_CONV + 1);
+	env->format = format;
+	env->index = 0;
+	env->buff = (char **)ft_memalloc(sizeof(char *) * 1);
+	*(env->buff) = (char *)ft_memalloc(sizeof(char) * (BUFF_SIZE + 1));
+	ft_bzero(*(env->buff), BUFF_SIZE + 1);
+	env->len_result = 0;
+	env->cur_specs = (t_specs *)ft_memalloc(sizeof(t_specs) * 1);
 }
 
 int					ft_printf(const char *format, ...)
 {
 	t_prf			env;
 
-	env.format = format;
-	env.index = 0;
 	va_start(env.args, format);
-	ft_bzero(env.buff, BUFF_SIZE + 1);
-	env.len_result = 0;
-	parsing_format(&env);
-	buff_handler(env.buff, FLUSH, NULL);
+	init_env(&env, format);
+	formating_string(&env);
+	ft_putstr(*(env.buff));
 	va_end(env.args);
+	ft_memdel((void **)&(env.cur_specs));
 	return (env.len_result);
 }

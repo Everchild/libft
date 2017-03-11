@@ -1,28 +1,37 @@
 #include <libft.h>
 
-static void         flush_buff(char *buff)
+static void         flush_buff(char **buff)
 {
     if (buff)
     {
-        ft_putstr(buff);
-        ft_bzero(buff, BUFF_SIZE + 1);
+        ft_putstr(*buff);
+        ft_bzero(*buff, BUFF_SIZE + 1);
     }
 }
 
-static void         fill_buff(char *buff, char *s)
+static void         fill_buff(char **buff, char *s)
 {
-    flush_buff(buff);
-    while (s && *s)
-    {
-        ft_strncpy(buff, s, BUFF_SIZE);
-        s += BUFF_SIZE;
-        flush_buff(buff);
+    int				place;
+
+	if (s)
+	{
+		place = BUFF_SIZE - ft_strlen(*buff);
+		ft_strncat(*buff, s, place);
+		s += place;
+    	while (s && *s)
+    	{
+			flush_buff(buff);
+        	ft_strncat(*buff, s, BUFF_SIZE);
+        	s += BUFF_SIZE;
+		}
     }
+	else
+		fill_buff(buff, "(null)");
 }
 
-void				buff_handler(char *buff, int action, char *s)
+void				buff_handler(char **buff, int action, char *s)
 {
-    if (buff)
+    if (*buff)
     {
         if (action == FILL)
             fill_buff(buff, s);

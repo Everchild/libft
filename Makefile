@@ -17,7 +17,8 @@ SRC_DIR = ./src
 OBJ_DIR = ./obj
 
 INC = $(INC_DIR)/libft.h
-SRC = pf_main.c pf_parsing_format.c pf_get_specs.c \
+SRC = pf_main.c pf_formating_string.c pf_get_specs.c pf_convert_specs.c \
+pf_get_type1.c \
 \
 ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c \
 ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c create_list.c create_node.c \

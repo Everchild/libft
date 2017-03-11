@@ -16,9 +16,9 @@
 # include <string.h>
 # include <stdarg.h>
 
-void				buff_handler(char *buff, int action, char *s);
+void				buff_handler(char **buff, int action, char *s);
 
-# define BUFF_SIZE 3
+# define BUFF_SIZE 1024
 # define FLUSH 1
 # define FILL 2
 
@@ -29,10 +29,33 @@ typedef enum		e_bool
 }					t_bool;
 
 /*
-** libprint
-*/
+ ** libprint
+ */
 
 # define PRF_LEN_MAX_CONV 3
+# define ALL_FORMATS "sSpdDioOuUxXcC"
+
+typedef enum		e_all_conv
+{
+	C_CHAR, // c hhd hhi
+	C_CHARP, // s
+	C_UCHAR, // hhu hho hhx hhX
+	C_WCHAR, // lc C
+	C_WCHARP, // ls S
+	C_PTR, // p
+	C_SHORT, // hd hi
+	C_USHORT, // hu ho hx hX
+	C_INT, // d i
+	C_UINT, // u o x X
+	C_LONG, // ld li D
+	C_ULONG, // lu U lo O lx lX
+	C_LONG_LONG, // lld lli
+	C_ULONG_LONG, // llu llo llx llX
+	C_INTMAX_T, // jd ji
+	C_UINTMAX_T, // ju jo jx jX
+	C_SIZE_T, // zd zu zo zi zx zX
+	C_COUNT
+}					t_all_conv;
 
 typedef enum		e_flag
 {
@@ -43,17 +66,6 @@ typedef enum		e_flag
 	PLUS = 1 << 4,
 	SPACE = 1 << 5
 }					t_flag;
-
-/*typedef struct      s_conversion
-{
-    char            *conv_list;
-    void            (*get_type)(t_prf);
-}                   t_conversion;
-
-static t_conversion             *conv = { {"chhdhhi", get_char },
-{},
-{}
-};*/
 
 typedef struct		s_specs
 {
@@ -68,18 +80,42 @@ typedef struct		s_prf
 	const char		*format;
 	size_t			index;
 	va_list			args;
-	char			buff[BUFF_SIZE + 1];
+	char			*(buff[BUFF_SIZE + 1]);
 	size_t			len_result;
-	t_specs			cur_specs;
+	t_specs			*cur_specs;
 }					t_prf;
 
+typedef struct      s_conversion
+{
+	t_all_conv		conv;
+	char			*conv_list;
+	void			(*treat_type)(t_prf *);
+}                   t_conversion;
+
 int					ft_printf(const char *format, ...);
-void                init_specs(t_specs *specs);
-void				parsing_format(t_prf *env);
-void				get_flag(t_prf *env);
-void				get_field_width(t_prf *env);
-void				get_precision(t_prf *env);
-void				get_conversion(t_prf *env);
+void				get_flag(t_prf *env, t_specs *specs);
+void				get_field_width(t_prf *env, t_specs *specs);
+void				get_precision(t_prf *env, t_specs *specs);
+void				get_conversion(t_prf *env, t_specs *specs);
+void				formating_string(t_prf *env);
+void				convert_specs(t_prf *env);
+void				treat_char(t_prf *env);
+void				treat_charp(t_prf *env);
+void				treat_uchar(t_prf *env);
+void				treat_wchar(t_prf *env);
+void				treat_wcharp(t_prf *env);
+void				treat_ptr(t_prf *env);
+void				treat_short(t_prf *env);
+void				treat_ushort(t_prf *env);
+void				treat_int(t_prf *env);
+void				treat_uint(t_prf *env);
+void				treat_long(t_prf *env);
+void				treat_ulong(t_prf *env);
+void				treat_long_long(t_prf *env);
+void				treat_ulong_long(t_prf *env);
+void				treat_intmax_t(t_prf *env);
+void				treat_uintmax_t(t_prf *env);
+void				treat_size_t(t_prf *env);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -92,8 +128,8 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putnbrbase_fd(int n, unsigned int base, int fd);
 
 /*
-** liblist
-*/
+ ** liblist
+ */
 
 typedef struct		s_node
 {
@@ -134,8 +170,8 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 /*
-** libmem
-*/
+ ** libmem
+ */
 
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
@@ -151,8 +187,8 @@ void				*ft_realloc(void *ptr, size_t size);
 
 
 /*
-** libstr
-*/
+ ** libstr
+ */
 
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s);
@@ -189,22 +225,22 @@ char				*ft_strndup(const char *s, size_t n);
 void				ft_strrev(char **s);
 
 /*
-** libtab
-*/
+ ** libtab
+ */
 
 char				**ft_tabdup(const char **tab);
 //void				ft_tabdel(char ***tab);
 
 /*
-** libmath
-*/
+ ** libmath
+ */
 
 long int			ft_abs(int n);
 long int			ft_pow(int n, int pow);
 
 /*
-** others
-*/
+ ** others
+ */
 
 void				ft_exit(char *str, int status);
 int					ft_isalpha(int c);
@@ -216,8 +252,8 @@ int					ft_toupper(int c);
 int					ft_tolower(int c);
 
 /*
-** gnl
-*/
+ ** gnl
+ */
 
 # define GNL_FIRST_CALL -3
 # define GNL_BUF_HAS_DATA -2
