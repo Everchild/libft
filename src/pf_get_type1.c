@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:05:37 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/11 17:03:04 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/15 18:11:57 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,14 @@ void				treat_charp(t_prf *env)
 
 void				treat_uchar(t_prf *env)
 {
-/*	unsigned char	to_format;
+	int				to_format;
+	char			*result;
 
-	to_format = va_arg(env->args, unsigned char);*/
-	buff_handler(&env->buff, FILL, "(unsigned char)");
+	to_format = va_arg(env->args, int);
+	result = ft_itoa(to_format);
+	env->len_result += ft_strlen(result);
+	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
 }
 
 void				treat_wchar(t_prf *env)
@@ -89,7 +93,9 @@ void				treat_int(t_prf *env)
 
 	to_format = va_arg(env->args, int);
 	result = ft_itoa(to_format);
+	env->len_result += ft_strlen(result);
 	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
 }
 
 void				treat_uint(t_prf *env)
