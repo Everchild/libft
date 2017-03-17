@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:42 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/15 18:26:30 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/17 16:29:17 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void			init_specs(t_specs *specs)
 	specs->field_width = -1;
 	specs->precision = -1;
 	ft_bzero(specs->conversion, PRF_LEN_MAX_CONV + 1);
+	specs->base = 10;
 }
 
 static void			handle_specs(t_prf *env)

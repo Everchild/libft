@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/15 18:25:59 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/17 16:29:22 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct		s_specs
 	int				field_width;
 	int				precision;
 	char			conversion[PRF_LEN_MAX_CONV + 1];
+	unsigned char	base;
 }					t_specs;
 
 typedef struct		s_prf
@@ -221,9 +222,10 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
-char				*ft_itoa(int n);
+char				*ft_itoa(long long n);
 char				*ft_strndup(const char *s, size_t n);
 void				ft_strrev(char **s);
+char				*ft_itoa_base(unsigned long long n, unsigned char base);
 
 /*
 ** libtab
@@ -236,7 +238,7 @@ char				**ft_tabdup(const char **tab);
 ** libmath
 */
 
-long int			ft_abs(int n);
+unsigned long long	ft_abs(long long n);
 long int			ft_pow(int n, int pow);
 
 /*

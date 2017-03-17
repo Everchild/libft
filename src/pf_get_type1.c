@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:05:37 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/15 18:11:57 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/17 16:29:24 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void				treat_charp(t_prf *env)
 
 void				treat_uchar(t_prf *env)
 {
-	int				to_format;
+	unsigned char	to_format;
 	char			*result;
 
 	to_format = va_arg(env->args, int);
-	result = ft_itoa(to_format);
+	result = ft_itoa_base(to_format, env->cur_specs->base);
 	env->len_result += ft_strlen(result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
@@ -83,18 +83,26 @@ void				treat_ptr(t_prf *env)
 
 void				treat_short(t_prf *env)
 {
-/*	short			to_format;
+	short			to_format;
+	char			*result;
 
-	to_format = va_arg(env->args, short);*/
-	buff_handler(&env->buff, FILL, "(short)");
+	to_format = va_arg(env->args, int);
+	result = ft_itoa(to_format);
+	env->len_result += ft_strlen(result);
+	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
 }
 
 void				treat_ushort(t_prf *env)
 {
-/*	unsigned short	to_format;
+	unsigned short	to_format;
+	char			*result;
 
-	to_format = va_arg(env->args, unsigned short);*/
-	buff_handler(&env->buff, FILL, "(unsigned short)");
+	to_format = va_arg(env->args, unsigned int);
+	result = ft_itoa_base(to_format, env->cur_specs->base);
+	env->len_result += ft_strlen(result);
+	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
 }
 
 void				treat_int(t_prf *env)
@@ -111,42 +119,62 @@ void				treat_int(t_prf *env)
 
 void				treat_uint(t_prf *env)
 {
-/*	unsigned int	to_format;
+	unsigned int	to_format;
+	char			*result;
 
-	to_format = va_arg(env->args, unsigned int);*/
-	buff_handler(&env->buff, FILL, "(unsigned int)");
+	to_format = va_arg(env->args, unsigned int);
+	result = ft_itoa_base(to_format, env->cur_specs->base);
+	env->len_result += ft_strlen(result);
+	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
 }
 
 void				treat_long(t_prf *env)
 {
-/*	long			to_format;
+	long			to_format;
+	char			*result;
 
-	to_format = va_arg(env->args, long);*/
-	buff_handler(&env->buff, FILL, "(long)");
+	to_format = va_arg(env->args, long);
+	result = ft_itoa(to_format);
+	env->len_result += ft_strlen(result);
+	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
 }
 
 void				treat_ulong(t_prf *env)
 {
-/*	unsigned long	to_format;
+	unsigned long	to_format;
+	char			*result;
 
-	to_format = va_arg(env->args, unsigned long);*/
-	buff_handler(&env->buff, FILL, "(unsigned long)");
+	to_format = va_arg(env->args, unsigned long);
+	result = ft_itoa_base(to_format, env->cur_specs->base);
+	env->len_result += ft_strlen(result);
+	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
 }
 
 void				treat_long_long(t_prf *env)
 {
-/*	long long		to_format;
+	long long		to_format;
+	char			*result;
 
-	to_format = va_arg(env->args, long long);*/
-	buff_handler(&env->buff, FILL, "(long long)");
+	to_format = va_arg(env->args, long long);
+	result = ft_itoa(to_format);
+	env->len_result += ft_strlen(result);
+	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
 }
 
 void				treat_ulong_long(t_prf *env)
 {
-/*	unsigned long long	to_format;
+	unsigned long long	to_format;
+	char			*result;
 
-	to_format = va_arg(env->args, unsigned long long);*/
-	buff_handler(&env->buff, FILL, "(unsigned long long)");
+	to_format = va_arg(env->args, unsigned long long);
+	result = ft_itoa_base(to_format, env->cur_specs->base);
+	env->len_result += ft_strlen(result);
+	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
 }
 
 void				treat_intmax_t(t_prf *env)

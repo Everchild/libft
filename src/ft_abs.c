@@ -6,16 +6,13 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:14:03 by sbrochar          #+#    #+#             */
-/*   Updated: 2016/10/05 17:09:07 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/17 15:47:13 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-long int			ft_abs(int n)
+unsigned long long 	ft_abs(long long n)
 {
-	long int		a;
-
-	a = n;
-	if (a < 0)
-		a *= -1;
-	return (a);
+	if (n < 0)
+		return (n *= -1);
+	return (n);
 }

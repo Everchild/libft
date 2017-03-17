@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:44:00 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/15 18:26:20 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/17 16:29:20 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ void				get_conversion(t_prf *env, t_specs *specs)
 		to_copy++;
 	}
 	if (to_copy <= PRF_LEN_MAX_CONV)
+	{
 		ft_strcpy(specs->conversion, ft_strsub(env->format, save, to_copy));
+		if (specs->conversion[to_copy] == 'o' || specs->conversion[to_copy] == 'O')
+			specs->base = 8;
+		else if (specs->conversion[to_copy] == 'x' || specs->conversion[to_copy] == 'X')
+			specs->base = 16;
+	}
 	env->index++;
 }
