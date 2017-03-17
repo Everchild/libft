@@ -15,6 +15,7 @@
 static t_conversion	*get_all_funcs(void)
 {
 	static t_conversion	ret[C_COUNT] = {
+	{ C_PERCENT, "%", &treat_percent },
 	{ C_CHAR, "chhdhhi", &treat_char },
 	{ C_CHARP, "s", &treat_charp },
 	{ C_UCHAR, "hhuhhohhxhhX", &treat_uchar },

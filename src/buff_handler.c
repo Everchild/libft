@@ -23,18 +23,24 @@ static void			flush_buff(char **buff)
 
 static void			fill_buff(char **buff, char *s)
 {
-	int				place;
+	size_t				place;
 
 	if (s)
 	{
 		place = BUFF_SIZE - ft_strlen(*buff);
 		ft_strncat(*buff, s, place);
-		s += place;
-		while (s && *s)
+		if (ft_strlen(s) > place)
 		{
-			flush_buff(buff);
-			ft_strncat(*buff, s, BUFF_SIZE);
-			s += BUFF_SIZE;
+			s += place;
+			while (ft_strlen(s))
+			{
+				flush_buff(buff);
+				ft_strncpy(*buff, s, BUFF_SIZE);
+				if (ft_strlen(s) > BUFF_SIZE)
+					s += BUFF_SIZE;
+				else
+					break ;
+			}
 		}
 	}
 	else

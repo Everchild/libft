@@ -12,6 +12,17 @@
 
 #include <libft.h>
 
+void				treat_percent(t_prf *env)
+{
+	char			*result;
+
+	result = (char *)ft_memalloc(sizeof(char)* 2);
+	result[0] = '%';
+	env->len_result += ft_strlen(result);
+	buff_handler(&env->buff, FILL, result);
+	ft_strdel(&result);
+}
+
 void				treat_char(t_prf *env)
 {
 	char			to_format;

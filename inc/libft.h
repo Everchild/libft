@@ -33,10 +33,11 @@ typedef enum		e_bool
 */
 
 # define PRF_LEN_MAX_CONV 3
-# define ALL_FORMATS "sSpdDioOuUxXcC"
+# define ALL_FORMATS "sSpdDioOuUxXcC%"
 
 typedef enum		e_all_conv
 {
+	C_PERCENT, // %
 	C_CHAR, // c hhd hhi
 	C_CHARP, // s
 	C_UCHAR, // hhu hho hhx hhX
@@ -99,6 +100,7 @@ void				get_precision(t_prf *env, t_specs *specs);
 void				get_conversion(t_prf *env, t_specs *specs);
 void				formating_string(t_prf *env);
 void				convert_specs(t_prf *env);
+void				treat_percent(t_prf *env);
 void				treat_char(t_prf *env);
 void				treat_charp(t_prf *env);
 void				treat_uchar(t_prf *env);

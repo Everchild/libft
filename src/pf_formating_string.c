@@ -23,21 +23,12 @@ static void			init_specs(t_specs *specs)
 static void			handle_specs(t_prf *env)
 {
 	env->index++;
-	if (env->format[env->index] == '%')
-	{
-		buff_handler(&env->buff, FILL, "%");
-		env->len_result++;
-		env->index++;
-	}
-	else
-	{
-		init_specs(env->cur_specs);
-		get_flag(env, env->cur_specs);
-		get_field_width(env, env->cur_specs);
-		get_precision(env, env->cur_specs);
-		get_conversion(env, env->cur_specs);
-		convert_specs(env);
-	}
+	init_specs(env->cur_specs);
+	get_flag(env, env->cur_specs);
+	get_field_width(env, env->cur_specs);
+	get_precision(env, env->cur_specs);
+	get_conversion(env, env->cur_specs);
+	convert_specs(env);
 }
 
 void				formating_string(t_prf *env)
