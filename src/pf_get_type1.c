@@ -20,7 +20,7 @@ void				treat_percent(t_prf *env)
 	result = (char *)ft_memalloc(sizeof(char)* 2);
 	result[0] = '%';
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -34,7 +34,7 @@ void				treat_char(t_prf *env)
 	result = (char *)ft_memalloc(sizeof(char)* 2);
 	result[0] = to_format;
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -45,7 +45,7 @@ void				treat_charp(t_prf *env)
 
 	to_format = va_arg(env->args, char *);
 	env->len_result += ft_strlen(to_format);
-	apply_opt(env->cur_specs, &to_format);
+//	apply_opt(env->cur_specs, &to_format);
 	buff_handler(&env->buff, FILL, to_format);
 }
 
@@ -57,7 +57,7 @@ void				treat_uchar(t_prf *env)
 	to_format = va_arg(env->args, int);
 	result = ft_itoa_base(to_format, env->cur_specs->base);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -94,7 +94,7 @@ void				treat_short(t_prf *env)
 	to_format = va_arg(env->args, int);
 	result = ft_itoa(to_format);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -107,7 +107,7 @@ void				treat_ushort(t_prf *env)
 	to_format = va_arg(env->args, unsigned int);
 	result = ft_itoa_base(to_format, env->cur_specs->base);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -120,7 +120,7 @@ void				treat_int(t_prf *env)
 	to_format = va_arg(env->args, int);
 	result = ft_itoa(to_format);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -133,7 +133,7 @@ void				treat_uint(t_prf *env)
 	to_format = va_arg(env->args, unsigned int);
 	result = ft_itoa_base(to_format, env->cur_specs->base);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -146,7 +146,7 @@ void				treat_long(t_prf *env)
 	to_format = va_arg(env->args, long);
 	result = ft_itoa(to_format);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -159,7 +159,7 @@ void				treat_ulong(t_prf *env)
 	to_format = va_arg(env->args, unsigned long);
 	result = ft_itoa_base(to_format, env->cur_specs->base);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -172,7 +172,7 @@ void				treat_long_long(t_prf *env)
 	to_format = va_arg(env->args, long long);
 	result = ft_itoa(to_format);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -185,7 +185,7 @@ void				treat_ulong_long(t_prf *env)
 	to_format = va_arg(env->args, unsigned long long);
 	result = ft_itoa_base(to_format, env->cur_specs->base);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -198,7 +198,7 @@ void				treat_intmax_t(t_prf *env)
 	to_format = va_arg(env->args, intmax_t);
 	result = ft_itoa(to_format);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -211,7 +211,7 @@ void				treat_uintmax_t(t_prf *env)
 	to_format = va_arg(env->args, uintmax_t);
 	result = ft_itoa_base(to_format, env->cur_specs->base);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
@@ -224,7 +224,7 @@ void				treat_size_t(t_prf *env)
 	to_format = va_arg(env->args, size_t);
 	result = ft_itoa_base(to_format, env->cur_specs->base);
 	env->len_result += ft_strlen(result);
-	apply_opt(env->cur_specs, &result);
+//	apply_opt(env->cur_specs, &result);
 	buff_handler(&env->buff, FILL, result);
 	ft_strdel(&result);
 }
