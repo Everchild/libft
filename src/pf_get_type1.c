@@ -13,19 +13,6 @@
 #include <libft.h>
 #include <stdlib.h>
 
-void				apply_opt(t_specs *specs, char **result)
-{
-	char			format;
-	char			*cpy;
-
-	format = specs->conversion[ft_strlen(specs->conversion) - 1];
-	cpy = ft_strdup(*result);
-	if (format == 'X')
-		ft_strupper(result);
-	if ((specs->flags | HASHTAG) && (format == 'X' || format == 'x'))
-		ft_memmove(*result, *result + 2);
-}
-
 void				treat_percent(t_prf *env)
 {
 	char			*result;
