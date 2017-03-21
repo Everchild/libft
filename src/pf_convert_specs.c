@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:36 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/11 17:37:27 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/21 20:04:14 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static t_options	*get_all_formats(void)
 	static t_options	ret[F_COUNT] = {
 	{ F_PERCENT, "%", &opt_on_percent },
 	{ F_STRING, "s", &opt_on_string },
-	{ F_WSTRING, "S", &opt_on_wstring },
+/*	{ F_WSTRING, "S", &opt_on_wstring },
 	{ F_PTR, "p", &opt_on_ptr },
 	{ F_DIGIT, "dDi", &opt_on_digit },
 	{ F_OCTAL, "oO", &opt_on_octal },
-	{ F_UDIGIT, "uU", &opt_on_udigit },
+	{ F_UDIGIT, "uU", &opt_on_udigit },*/
 	{ F_HEXA, "xX", &opt_on_hexa },
-	{ F_CHAR, "c", &opt_on_char },
-	{ F_WCHAR, "C", &opt_on_wchar }
+	{ F_CHAR, "c", &opt_on_char }/*,
+	{ F_WCHAR, "C", &opt_on_wchar }*/
 	};
 
 	return (ret);
@@ -75,7 +75,7 @@ void				convert_specs(t_prf *env)
 				if (!(ptr - 1 && (*(ptr - 1) == 'h' || *(ptr - 1) == 'l'
 					|| *(ptr - 1) == 'j' || *(ptr - 1) == 'z')))
 				{
-					all_formats[i].treat_type(env);
+					all_formats[i].treat_type(env, &env->cur_specs->result);
 					break ;
 				}
 			}
@@ -86,4 +86,22 @@ void				convert_specs(t_prf *env)
 	}
 }
 
-void				apply_opt
+void				apply_opt(t_prf *env)
+{
+	t_options		*options;
+	int				i;
+	char			format;
+
+	options = get_all_formats();
+	i = 0;
+	format = env->cur_specs->conversion[ft_strlen(env->cur_specs->conversion) - 1];
+	while (i < F_COUNT)
+	{
+		if (ft_strchr(options[i].formats, format))
+		{
+			options[i].apply_opt(env->cur_specs, &env->cur_specs->result);
+			break ;
+		}
+		i++;
+	}
+}

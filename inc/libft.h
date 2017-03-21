@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/17 21:01:13 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/21 20:04:19 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum		e_bool
 	FALSE,
 	TRUE
 }					t_bool;
-#include <stdio.h>
+
 /*
 ** libprint
 */
@@ -37,16 +37,16 @@ typedef enum		e_bool
 
 typedef enum		e_format
 {
-	F_PERCENT,
-	F_STRING,
-	F_WSTRING,
-	F_PTR,
-	F_DIGIT,
-	F_OCTAL,
-	F_UDIGIT,
-	F_HEXA,
-	F_CHAR,
-	F_WCHAR,
+	F_PERCENT, // %
+	F_STRING, // s
+/*	F_WSTRING, // S
+	F_PTR, // p
+	F_DIGIT, // dDi
+	F_OCTAL, // oO
+	F_UDIGIT, // uU */
+	F_HEXA, // xX
+	F_CHAR, // c
+/*	F_WCHAR, // C */
 	F_COUNT
 }					t_format;
 
@@ -89,7 +89,7 @@ typedef struct		s_specs
 	int				field_width;
 	int				precision;
 	char			conversion[PRF_LEN_MAX_CONV + 1];
-	t_format		format;
+	char			*result;
 	unsigned char	base;
 }					t_specs;
 
@@ -107,14 +107,14 @@ typedef struct		s_options
 {
 	t_format		format;
 	char			*formats;
-	void			(*apply_opt)(t_prf *);
+	void			(*apply_opt)(t_specs *, char **);
 }					t_options;
 
 typedef struct		s_conversion
 {
 	t_all_conv		conv;
 	char			*conv_list;
-	void			(*treat_type)(t_prf *);
+	void			(*treat_type)(t_prf *, char **);
 }					t_conversion;
 
 int					ft_printf(const char *format, ...);
@@ -124,34 +124,35 @@ void				get_precision(t_prf *env, t_specs *specs);
 void				get_conversion(t_prf *env, t_specs *specs);
 void				formating_string(t_prf *env);
 void				convert_specs(t_prf *env);
-void				treat_percent(t_prf *env);
-void				treat_char(t_prf *env);
-void				treat_charp(t_prf *env);
-void				treat_uchar(t_prf *env);
-void				treat_wchar(t_prf *env);
-void				treat_wcharp(t_prf *env);
-void				treat_ptr(t_prf *env);
-void				treat_short(t_prf *env);
-void				treat_ushort(t_prf *env);
-void				treat_int(t_prf *env);
-void				treat_uint(t_prf *env);
-void				treat_long(t_prf *env);
-void				treat_ulong(t_prf *env);
-void				treat_long_long(t_prf *env);
-void				treat_ulong_long(t_prf *env);
-void				treat_intmax_t(t_prf *env);
-void				treat_uintmax_t(t_prf *env);
-void				treat_size_t(t_prf *env);
-void				opt_on_percent(t_prf *env);
-void				opt_on_string(t_prf *env);
-void				opt_on_wstring(t_prf *env);
-void				opt_on_ptr(t_prf *env);
-void				opt_on_digit(t_prf *env);
-void				opt_on_octal(t_prf *env);
-void				opt_on_udigit(t_prf *env);
-void				opt_on_hexa(t_prf *env);
-void				opt_on_char(t_prf *env);
-void				opt_on_wchar(t_prf *env);
+void				apply_opt(t_prf *env);
+void				treat_percent(t_prf *env, char **result);
+void				treat_char(t_prf *env, char **result);
+void				treat_charp(t_prf *env, char **result);
+void				treat_uchar(t_prf *env, char **result);
+void				treat_wchar(t_prf *env, char **result);
+void				treat_wcharp(t_prf *env, char **result);
+void				treat_ptr(t_prf *env, char **result);
+void				treat_short(t_prf *env, char **result);
+void				treat_ushort(t_prf *env, char **result);
+void				treat_int(t_prf *env, char **result);
+void				treat_uint(t_prf *env, char **result);
+void				treat_long(t_prf *env, char **result);
+void				treat_ulong(t_prf *env, char **result);
+void				treat_long_long(t_prf *env, char **result);
+void				treat_ulong_long(t_prf *env, char **result);
+void				treat_intmax_t(t_prf *env, char **result);
+void				treat_uintmax_t(t_prf *env, char **result);
+void				treat_size_t(t_prf *env, char **result);
+void				opt_on_percent(t_specs *specs, char **result);
+void				opt_on_string(t_specs *specs, char **result);
+void				opt_on_wstring(t_specs *specs, char **result);
+void				opt_on_ptr(t_specs *specs, char **result);
+void				opt_on_digit(t_specs *specs, char **result);
+void				opt_on_octal(t_specs *specs, char **result);
+void				opt_on_udigit(t_specs *specs, char **result);
+void				opt_on_hexa(t_specs *specs, char **result);
+void				opt_on_char(t_specs *specs, char **result);
+void				opt_on_wchar(t_specs *specs, char **result);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
