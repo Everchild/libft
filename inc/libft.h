@@ -35,6 +35,21 @@ typedef enum		e_bool
 # define PRF_LEN_MAX_CONV 3
 # define ALL_FORMATS "sSpdDioOuUxXcC%"
 
+typedef enum		e_format
+{
+	F_PERCENT,
+	F_STRING,
+	F_WSTRING,
+	F_PTR,
+	F_DIGIT,
+	F_OCTAL,
+	F_UDIGIT,
+	F_HEXA,
+	F_CHAR,
+	F_WCHAR,
+	F_COUNT
+}					t_format;
+
 typedef enum		e_all_conv
 {
 	C_PERCENT, // %
@@ -74,6 +89,7 @@ typedef struct		s_specs
 	int				field_width;
 	int				precision;
 	char			conversion[PRF_LEN_MAX_CONV + 1];
+	t_format		format;
 	unsigned char	base;
 }					t_specs;
 
@@ -86,6 +102,13 @@ typedef struct		s_prf
 	size_t			len_result;
 	t_specs			*cur_specs;
 }					t_prf;
+
+typedef struct		s_options
+{
+	t_format		format;
+	char			*formats;
+	void			(*apply_opt)(t_prf *);
+}					t_options;
 
 typedef struct		s_conversion
 {
@@ -119,6 +142,16 @@ void				treat_ulong_long(t_prf *env);
 void				treat_intmax_t(t_prf *env);
 void				treat_uintmax_t(t_prf *env);
 void				treat_size_t(t_prf *env);
+void				opt_on_percent(t_prf *env);
+void				opt_on_string(t_prf *env);
+void				opt_on_wstring(t_prf *env);
+void				opt_on_ptr(t_prf *env);
+void				opt_on_digit(t_prf *env);
+void				opt_on_octal(t_prf *env);
+void				opt_on_udigit(t_prf *env);
+void				opt_on_hexa(t_prf *env);
+void				opt_on_char(t_prf *env);
+void				opt_on_wchar(t_prf *env);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);

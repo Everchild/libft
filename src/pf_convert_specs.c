@@ -12,6 +12,23 @@
 
 #include <libft.h>
 
+static t_options	*get_all_formats(void)
+{
+	static t_options	ret[F_COUNT] = {
+	{ F_PERCENT, "%", &opt_on_percent },
+	{ F_STRING, "s", &opt_on_string },
+	{ F_WSTRING, "S", &opt_on_wstring },
+	{ F_PTR, "p", &opt_on_ptr },
+	{ F_DIGIT, "dDi", &opt_on_digit },
+	{ F_OCTAL, "oO", &opt_on_octal },
+	{ F_UDIGIT, "uU", &opt_on_udigit },
+	{ F_HEXA, "xX", &opt_on_hexa },
+	{ F_CHAR, "c", &opt_on_char },
+	{ F_WCHAR, "C", &opt_on_wchar }
+	};
+
+	return (ret);
+}
 static t_conversion	*get_all_funcs(void)
 {
 	static t_conversion	ret[C_COUNT] = {
@@ -68,3 +85,5 @@ void				convert_specs(t_prf *env)
 			buff_handler(&env->buff, FILL, "(error)");
 	}
 }
+
+void				apply_opt
