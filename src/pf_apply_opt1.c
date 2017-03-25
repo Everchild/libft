@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:32:03 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/21 20:04:02 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/25 22:48:23 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,41 +36,27 @@ void				opt_on_percent(t_specs *specs, char **result)
 void				opt_on_string(t_specs *specs, char **result)
 {
 	char			*tmp;
-	char			to_fill;
 	int				len;
 
 	tmp = NULL;
-	to_fill = ' ';
-	len = ft_strlen(*result); // len = 6
-	if (specs->precision > 0)
-	{
-		if (specs->precision > len)
-			specs->precision = len;
-		else
-			len = specs->precision;
-	}
-	if (len < specs->field_width) // 6 < 10
-		len = specs->field_width; // len = 10
-	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1)); // tmp = 10 charac
-	ft_memset(tmp, to_fill, len); // tmp = "          "
-	if (specs->flags & MINUS)
-	{
-		if (specs->precision > 0)
-			tmp = ft_strncpy(tmp, *result, specs->precision);
-		else
-			tmp = ft_strncpy(tmp, *result, ft_strlen(*result) - 1); 
-	}
+	len = ft_strlen(*result);
+	if (specs->precision > len)
+		specs->precision = len;
+	else if (specs->precision > 0)
+		len = specs->precision;
+	if (len < specs->field_width)
+		len = specs->field_width;
+	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	ft_memset(tmp, ' ', len);
+	if ((specs->flags & MINUS) && specs->precision > 0)
+		tmp = ft_strncpy(tmp, *result, specs->precision);
+	else if (specs->flags & MINUS)
+		tmp = ft_strncpy(tmp, *result, ft_strlen(*result)); 
+	else if (specs->precision > 0)
+		ft_strncpy(tmp + (len - specs->precision), *result, specs->precision);
 	else
-	{
-		if (specs->precision > 0)
-			tmp = ft_strncpy(tmp + (len - specs->precision), *result, specs->precision);
-		else
-		{
-//			printf("tmp: [%s], len: %d, strlen(result): %d\n", tmp, len, ft_strlen(*result));
-			tmp = ft_strncpy(tmp + (len - ft_strlen(*result)), *result, ft_strlen(*result));
-		}
-	}
-//	ft_strdel(&(*result));
+		ft_strncpy((tmp + (len - ft_strlen(*result))), *result, ft_strlen(*result));
+	ft_strdel(&(*result));
 	*result = tmp;
 }
 
@@ -93,11 +79,45 @@ void				opt_on_octal(t_specs *specs, char **result)
 void				opt_on_udigit(t_specs *specs, char **result)
 {
 }*/
-
+//precision
+//options
+//field width
 void				opt_on_hexa(t_specs *specs, char **result)
 {
-	if (specs->conversion[ft_strlen(specs->conversion) - 1] == 'X')
-		ft_strupper(result);
+	char			*tmp;
+	size_t			len;
+	int				orig_len;
+
+	orig_len = ft_strlen(*result);
+	len = 0;
+	if (orig_len > specs->precision && orig_len > specs->field_width)
+		len = orig_len;
+	else if (specs->precision > specs->field_width)
+		len = specs->precision;
+	else if (specs->field_width > specs->precision)
+		len = specs->field_width;
+	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	if (specs->flags & ZERO)
+		ft_memset(tmp, '0', len);
+	else
+		ft_memset(tmp, ' ', len);
+//	printf("len: %zu, tmp: [%s]\n", len, tmp);
+/*	if (specs->flags & MINUS)
+	{
+		
+	}
+	else
+	{*/
+		if (specs->precision > 0)
+			ft_memset(tmp + (len - specs->precision), '0', specs->precision);
+		ft_strncpy((tmp + (len - ft_strlen(*result))), *result, ft_strlen(*result));
+//	}
+		if ((specs->flags) & HASHTAG && ft_strcmp("0", *result))
+			tmp = ft_strjoinf("0x", tmp, 2);
+		if (specs->conversion[ft_strlen(specs->conversion) - 1] == 'X')
+			ft_strupper(&tmp);
+		ft_strdel(result);
+		*result = tmp;
 }
 
 void				opt_on_char(t_specs *specs, char **result)
