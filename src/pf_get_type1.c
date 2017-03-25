@@ -54,6 +54,7 @@ void				treat_wchar(t_prf *env, char **result)
 
 	to_format = va_arg(env->args, wchar_t);
 	*result = ft_strdup("(wide char)");
+	to_format++;
 }
 
 void				treat_wcharp(t_prf *env, char **result)
@@ -62,6 +63,7 @@ void				treat_wcharp(t_prf *env, char **result)
 
 	to_format = va_arg(env->args, wchar_t *);
 	*result = ft_strdup("(wide char *)");
+	to_format++;
 }
 
 void				treat_ptr(t_prf *env, char **result)
@@ -70,6 +72,7 @@ void				treat_ptr(t_prf *env, char **result)
 
 	to_format = va_arg(env->args, unsigned int);
 	*result = ft_strdup("(pointer)");
+	to_format++;
 }
 
 void				treat_short(t_prf *env, char **result)

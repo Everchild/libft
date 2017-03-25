@@ -15,7 +15,8 @@
 
 # include <string.h>
 # include <stdarg.h>
-
+#include <inttypes.h>
+#include <stdio.h>
 void				buff_handler(char **buff, int action, char *s);
 
 # define BUFF_SIZE 1024

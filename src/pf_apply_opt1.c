@@ -66,8 +66,8 @@ void				opt_on_string(t_specs *specs, char **result)
 			tmp = ft_strncpy(tmp + (len - specs->precision), *result, specs->precision);
 		else
 		{
-			printf("tmp: [%s], len: %d, strlen(result): %d\n");
-			tmp = ft_strncpy((tmp + (len - ft_strlen(*result)), *result, ft_strlen(*result));
+//			printf("tmp: [%s], len: %d, strlen(result): %d\n", tmp, len, ft_strlen(*result));
+			tmp = ft_strncpy(tmp + (len - ft_strlen(*result)), *result, ft_strlen(*result));
 		}
 	}
 //	ft_strdel(&(*result));
