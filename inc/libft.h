@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/25 22:43:58 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/26 22:34:21 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ typedef enum		e_format
 	F_PERCENT, // %
 	F_STRING, // s
 /*	F_WSTRING, // S
-	F_PTR, // p
+	F_PTR, // p */
 	F_DIGIT, // dDi
 	F_OCTAL, // oO
-	F_UDIGIT, // uU */
+	F_UDIGIT, // uU`
 	F_HEXA, // xX
 	F_CHAR, // c
 /*	F_WCHAR, // C */

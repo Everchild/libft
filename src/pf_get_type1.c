@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:05:37 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/21 19:09:04 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/26 22:34:07 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void				treat_char(t_prf *env, char **result)
 	to_format = va_arg(env->args, int);
 	*result = (char *)ft_memalloc(sizeof(char) * 2);
 	*(result[0]) = to_format;
+	if (!to_format)
+		env->len_result++;
 }
 
 void				treat_charp(t_prf *env, char **result)
