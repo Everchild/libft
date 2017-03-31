@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:32:03 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/26 22:34:17 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/03/31 16:34:40 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,42 @@ void				opt_on_udigit(t_specs *specs, char **result)
 void				opt_on_hexa(t_specs *specs, char **result)
 {
 	char			*tmp;
+	int 			len;
+	int				orig_len;
+	int				i;
+
+	i = 0;
+	orig_len = ft_strlen(*result);
+	len = orig_len;
+	if (specs->precision > orig_len)
+	{
+		tmp = (char *)ft_memalloc(sizeof(char) * (specs->precision + 1));
+		ft_memset(tmp, '0', specs->precision);
+//		printf("tmp: [%s]\n", tmp);
+		ft_strcpy(tmp + (specs->precision - orig_len), *result);
+		ft_strdel(result);
+		*result = tmp;
+	}
+	if (specs->flags & HASHTAG)
+		*result = ft_strjoinf("0x", *result, 2);
+	orig_len = ft_strlen(*result);
+	if (len < specs->field_width)
+		len = specs->field_width;
+	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	if (specs->flags & ZERO && !(specs->flags & MINUS))
+		ft_memset(tmp, '0', len);
+	else
+		ft_memset(tmp, ' ', len);
+	if (specs->flags & MINUS)
+		tmp = ft_strncpy(tmp, *result, orig_len);
+	else
+		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
+	if (specs->conversion[ft_strlen(specs->conversion) - 1] == 'X')
+		ft_strupper(&tmp);
+	ft_strdel(result);
+	*result = tmp;
+
+/*	char			*tmp;
 	size_t			len;
 	int				orig_len;
 
@@ -234,7 +270,7 @@ void				opt_on_hexa(t_specs *specs, char **result)
 	if (specs->conversion[ft_strlen(specs->conversion) - 1] == 'X')
 		ft_strupper(&tmp);
 	ft_strdel(result);
-	*result = tmp;
+	*result = tmp;*/
 }
 
 void				opt_on_char(t_specs *specs, char **result)
