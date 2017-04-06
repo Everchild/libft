@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/31 16:34:43 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:17:54 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,20 @@ typedef enum		e_bool
 
 # define PRF_LEN_MAX_CONV 3
 # define ALL_FORMATS "sSpdDioOuUxXcC%"
+# define ALL_MODIFIERS "hljz"
 
 typedef enum		e_format
 {
 	F_PERCENT, // %
 	F_STRING, // s
-/*	F_WSTRING, // S
-	F_PTR, // p */
+//	F_WSTRING, // S
+	F_PTR, // p
 	F_DIGIT, // dDi
 	F_OCTAL, // oO
 	F_UDIGIT, // uU`
 	F_HEXA, // xX
 	F_CHAR, // c
-/*	F_WCHAR, // C */
+//	F_WCHAR, // C
 	F_COUNT
 }					t_format;
 
@@ -124,7 +125,7 @@ void				get_field_width(t_prf *env, t_specs *specs);
 void				get_precision(t_prf *env, t_specs *specs);
 void				get_conversion(t_prf *env, t_specs *specs);
 void				formating_string(t_prf *env);
-void				convert_specs(t_prf *env);
+t_bool				convert_specs(t_prf *env);
 void				apply_opt(t_prf *env);
 void				treat_percent(t_prf *env, char **result);
 void				treat_char(t_prf *env, char **result);

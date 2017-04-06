@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:32:03 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/06 14:14:57 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:17:56 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,29 @@ void				opt_on_string(t_specs *specs, char **result)
 
 /*void				opt_on_wstring(t_specs *specs, char **result)
 {
-}
+}*/
 
 void				opt_on_ptr(t_specs *specs, char **result)
 {
-}*/
+	char			*tmp;
+	size_t			len;
+	int				orig_len;
+
+	orig_len = ft_strlen(*result);
+	len = 0;
+	if (orig_len > specs->field_width)
+		len = orig_len;
+	else
+		len = specs->field_width;
+	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	ft_memset(tmp, ' ', len);
+	if (specs->flags & MINUS)
+		tmp = ft_strncpy(tmp, *result, orig_len);
+	else
+		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
+	ft_strdel(result);
+	*result = tmp;
+}
 
 void				opt_on_digit(t_specs *specs, char **result)
 {
@@ -200,9 +218,7 @@ void				opt_on_udigit(t_specs *specs, char **result)
 	ft_strdel(result);
 	*result = tmp;
 }
-//precision
-//options
-//field width
+
 void				opt_on_hexa(t_specs *specs, char **result)
 {
 	char			*tmp;

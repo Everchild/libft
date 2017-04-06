@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:36 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/26 22:34:14 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:17:49 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static t_options	*get_all_formats(void)
 	static t_options	ret[F_COUNT] = {
 	{ F_PERCENT, "%", &opt_on_percent },
 	{ F_STRING, "s", &opt_on_string },
-/*	{ F_WSTRING, "S", &opt_on_wstring },
-	{ F_PTR, "p", &opt_on_ptr },*/
+//	{ F_WSTRING, "S", &opt_on_wstring },
+	{ F_PTR, "p", &opt_on_ptr },
 	{ F_DIGIT, "dDi", &opt_on_digit },
 	{ F_OCTAL, "oO", &opt_on_octal },
 	{ F_UDIGIT, "uU", &opt_on_udigit },
@@ -55,7 +55,7 @@ static t_conversion	*get_all_funcs(void)
 	return (ret);
 }
 
-void				convert_specs(t_prf *env)
+t_bool				convert_specs(t_prf *env)
 {
 	t_conversion	*all_formats;
 	int				i;
@@ -64,7 +64,7 @@ void				convert_specs(t_prf *env)
 	ptr = NULL;
 	all_formats = get_all_funcs();
 	if (!*(env->cur_specs->conversion))
-		buff_handler(&env->buff, FILL, "(error)");
+		return (FALSE);
 	else
 	{
 		i = 0;
@@ -82,8 +82,9 @@ void				convert_specs(t_prf *env)
 			i++;
 		}
 		if (!ptr)
-			buff_handler(&env->buff, FILL, "(error)");
+			return (FALSE);
 	}
+	return (TRUE);
 }
 
 void				apply_opt(t_prf *env)

@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:42 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/26 21:39:11 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:17:58 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,18 @@ static void			handle_specs(t_prf *env)
 	get_field_width(env, env->cur_specs);
 	get_precision(env, env->cur_specs);
 	get_conversion(env, env->cur_specs);
-	convert_specs(env);
-	apply_opt(env);
-	buff_handler(&env->buff, FILL, env->cur_specs->result);
-	env->len_result += ft_strlen(env->cur_specs->result);
-	ft_strdel(&env->cur_specs->result);
+	if (convert_specs(env))
+	{
+		apply_opt(env);
+		buff_handler(&env->buff, FILL, env->cur_specs->result);
+		env->len_result += ft_strlen(env->cur_specs->result);
+		ft_strdel(&env->cur_specs->result);
+	}
+	else
+	{
+		buff_handler(&env->buff, FILL, "(error)");
+		env->len_result += 7;
+	}
 }
 
 void				formating_string(t_prf *env)

@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:05:37 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/26 22:34:07 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/06 14:55:20 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void				treat_wcharp(t_prf *env, char **result)
 
 void				treat_ptr(t_prf *env, char **result)
 {
-	unsigned int	to_format;
+	unsigned long int	to_format;
 
-	to_format = va_arg(env->args, unsigned int);
-	*result = ft_strdup("(pointer)");
-	to_format++;
+	to_format = va_arg(env->args, unsigned long int);
+	*result = ft_itoa_base(to_format, env->cur_specs->base);
+	*result = ft_strjoinf("0x", *result, 2);
 }
 
 void				treat_short(t_prf *env, char **result)

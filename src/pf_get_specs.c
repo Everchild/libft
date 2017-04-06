@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:44:00 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/17 21:01:24 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:17:51 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,12 @@ void				get_conversion(t_prf *env, t_specs *specs)
 {
 	size_t			save;
 	size_t			to_copy;
+	const char		*all_letters;
 
 	save = env->index;
+	all_letters = ft_strjoin(ALL_MODIFIERS, ALL_FORMATS);
+	if (!ft_strchr(all_letters, env->format[env->index]))
+		return ;
 	to_copy = 1;
 	while (env->format && env->format[env->index] && !ft_strchr(ALL_FORMATS, env->format[env->index]))
 	{
@@ -83,7 +87,7 @@ void				get_conversion(t_prf *env, t_specs *specs)
 		ft_strcpy(specs->conversion, ft_strsub(env->format, save, to_copy));
 		if (specs->conversion[to_copy - 1] == 'o' || specs->conversion[to_copy - 1] == 'O')
 			specs->base = 8;
-		else if (specs->conversion[to_copy - 1] == 'x' || specs->conversion[to_copy - 1] == 'X')
+		else if (specs->conversion[to_copy - 1] == 'x' || specs->conversion[to_copy - 1] == 'X' || specs->conversion[to_copy - 1] == 'p')
 			specs->base = 16;
 	}
 	env->index++;
