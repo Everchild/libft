@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:32:03 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/06 11:11:38 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/06 14:14:57 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,44 +71,54 @@ void				opt_on_ptr(t_specs *specs, char **result)
 void				opt_on_digit(t_specs *specs, char **result)
 {
 	char			*tmp;
-	size_t			len;
+	int 			len;
 	int				orig_len;
 
-	if (specs->flags & PLUS && *(result[0]) != '-')
-		*result = ft_strjoinf("+", *result, 2);
-	else if (specs->flags & SPACE && *(result[0]) != '-')
-		*result = ft_strjoinf(" ", *result, 2);
 	orig_len = ft_strlen(*result);
-	len = 0;
-	if (orig_len > specs->precision && orig_len > specs->field_width)
-		len = orig_len;
-	else if (specs->precision > specs->field_width)
-		len = specs->precision;
-	else if (specs->field_width > specs->precision)
+	len = orig_len;
+	if (specs->precision > orig_len)
+	{
+		tmp = (char *)ft_memalloc(sizeof(char) * (specs->precision + 1));
+		ft_memset(tmp, '0', specs->precision);
+		ft_strncpy(tmp + (specs->precision - orig_len), *result, orig_len);
+		ft_strdel(result);
+		*result = tmp;
+	}
+	if (specs->flags & PLUS && !ft_strchr(*result, '-'))
+		*result = ft_strjoinf("+", *result, 2);
+	else if (specs->flags & SPACE && !ft_strchr(*result, '-'))
+		*result = ft_strjoinf(" ", *result, 2);
+	orig_len = len = ft_strlen(*result);
+	if (orig_len < specs->field_width)
 		len = specs->field_width;
 	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
-	if (specs->flags & ZERO && !(specs->flags & MINUS))
+	if (specs->flags & ZERO && !(specs->flags & MINUS) && specs->precision < 0)
+	{
 		ft_memset(tmp, '0', len);
+	}
 	else
 		ft_memset(tmp, ' ', len);
 	if (specs->flags & MINUS)
-	{
-		if (specs->precision > 0)
-		{
-			ft_memset(tmp, '0', specs->precision);
-			ft_strncpy(tmp + (specs->precision - orig_len), *result, orig_len);
-		}
-		else
-			tmp = ft_strncpy(tmp, *result, orig_len);
-	}
+		tmp = ft_strncpy(tmp, *result, orig_len);
 	else
-	{
-		if (specs->precision > 0)
-			ft_memset(tmp + (len - specs->precision), '0', specs->precision);
 		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
-	}
+	if (specs->conversion[ft_strlen(specs->conversion) - 1] == 'X')
+		ft_strupper(&tmp);
 	ft_strdel(result);
 	*result = tmp;
+	if (specs->flags & ZERO)
+	{
+		if ((tmp = ft_strchr(*result, '+')) != 0 && tmp != *result)
+		{
+			*tmp = '0';
+			**result = '+';
+		}
+		else if ((tmp = ft_strchr(*result, '-')) != 0 && tmp != *result)
+		{
+			*tmp = '0';
+			**result = '-';
+		}
+	}
 }
 
 void				opt_on_octal(t_specs *specs, char **result)
@@ -219,14 +229,7 @@ void				opt_on_hexa(t_specs *specs, char **result)
 		len = specs->field_width;
 	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
 	if (specs->flags & ZERO && !(specs->flags & MINUS) && specs->precision < 0)
-	{
 		ft_memset(tmp, '0', len);
-		if ((tmp2 = ft_strchr(*result, 'x')) != 0)
-		{
-			*tmp2 = '0';
-			tmp[1] = 'x';
-		}
-	}
 	else
 		ft_memset(tmp, ' ', len);
 	if (specs->flags & MINUS)
@@ -237,6 +240,14 @@ void				opt_on_hexa(t_specs *specs, char **result)
 		ft_strupper(&tmp);
 	ft_strdel(result);
 	*result = tmp;
+	if (specs->flags & ZERO)
+	{
+		if ((tmp2 = ft_strchr(*result, 'x')) != 0)
+		{
+			*tmp2 = '0';
+			tmp[1] = 'x';
+		}
+	}
 }
 
 void				opt_on_char(t_specs *specs, char **result)
