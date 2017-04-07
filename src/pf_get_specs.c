@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:44:00 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/06 19:17:51 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/07 12:41:30 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void				get_conversion(t_prf *env, t_specs *specs)
 
 	save = env->index;
 	all_letters = ft_strjoin(ALL_MODIFIERS, ALL_FORMATS);
-	if (!ft_strchr(all_letters, env->format[env->index]))
+	if (!(env->format[env->index]) || !ft_strchr(all_letters, env->format[env->index]))
 		return ;
 	to_copy = 1;
 	while (env->format && env->format[env->index] && !ft_strchr(ALL_FORMATS, env->format[env->index]))

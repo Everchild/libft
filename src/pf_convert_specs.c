@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:36 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/06 19:17:49 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/07 12:25:27 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ t_bool				convert_specs(t_prf *env)
 			}
 			i++;
 		}
-		if (!ptr)
-			return (FALSE);
+		if (ptr)
+			return (TRUE);
 	}
-	return (TRUE);
+	return (FALSE);
 }
 
 void				apply_opt(t_prf *env)
