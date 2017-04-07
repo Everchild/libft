@@ -33,23 +33,23 @@ static t_conversion	*get_all_funcs(void)
 {
 	static t_conversion	ret[C_COUNT] = {
 	{ C_PERCENT, "%", &treat_percent },
-	{ C_CHAR, "chhdhhi", &treat_char },
+	{ C_CHAR, "chhdhhihhD", &treat_char },
 	{ C_CHARP, "s", &treat_charp },
-	{ C_UCHAR, "hhuhhohhxhhX", &treat_uchar },
+	{ C_UCHAR, "hhuhhohhxhhXhhUhhO", &treat_uchar },
 	{ C_WCHAR, "lcC", &treat_wchar },
 	{ C_WCHARP, "lsS", &treat_wcharp },
 	{ C_PTR, "p", &treat_ptr },
-	{ C_SHORT, "hdhi", &treat_short },
-	{ C_USHORT, "huhohxhX", &treat_ushort },
+	{ C_SHORT, "hdhihD", &treat_short },
+	{ C_USHORT, "huhohxhXhUhO", &treat_ushort },
 	{ C_INT, "di", &treat_int },
 	{ C_UINT, "ouxX", &treat_uint },
-	{ C_LONG, "ldliD", &treat_long },
-	{ C_ULONG, "luUloOlxlX", &treat_ulong },
-	{ C_LONG_LONG, "lldlli", &treat_long_long },
-	{ C_ULONG_LONG, "llullollxllX", &treat_ulong_long },
-	{ C_INTMAX_T, "jdji", &treat_intmax_t },
-	{ C_UINTMAX_T, "jujojxjX", &treat_uintmax_t },
-	{ C_SIZE_T, "zdzizuzozxzX", &treat_size_t }
+	{ C_LONG, "ldliDlD", &treat_long },
+	{ C_ULONG, "luUloOlxlXlUlO", &treat_ulong },
+	{ C_LONG_LONG, "lldllillD", &treat_long_long },
+	{ C_ULONG_LONG, "llullollxllXllUllO", &treat_ulong_long },
+	{ C_INTMAX_T, "jdjijD", &treat_intmax_t },
+	{ C_UINTMAX_T, "jujojxjXjUjO", &treat_uintmax_t },
+	{ C_SIZE_T, "zdzizuzozxzXzDzUzO", &treat_size_t }
 	};
 
 	return (ret);

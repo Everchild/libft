@@ -32,6 +32,8 @@ char				*ft_itoa(long long n)
 	size_t				i;
 	unsigned long long	n_abs;
 
+	if (n == LONG_MIN)
+		return (ft_strdup("-9223372036854775808"));
 	n_abs = ft_abs(n);
 	len = findlen(n_abs);
 	len += n < 0 ? 1 : 0;

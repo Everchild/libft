@@ -15,6 +15,7 @@
 
 # include <string.h>
 # include <stdarg.h>
+# include <limits.h>
 #include <inttypes.h>
 #include <stdio.h>
 void				buff_handler(char **buff, int action, char *s);
