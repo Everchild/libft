@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:40:04 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/17 16:05:47 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/07 19:50:27 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char				*ft_itoa(long long n)
 	size_t				i;
 	unsigned long long	n_abs;
 
+	if (n == LLONG_MIN)
+		return (ft_strdup("-9223372036854775808"));
 	if (n == LONG_MIN)
 		return (ft_strdup("-9223372036854775808"));
 	n_abs = ft_abs(n);

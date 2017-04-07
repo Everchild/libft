@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:44:00 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/07 12:41:30 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/07 19:56:52 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ void				get_precision(t_prf *env, t_specs *specs)
 			to_copy++;
 			env->index++;
 		}
-		specs->precision = ft_atoi(ft_strsub(env->format, save, to_copy));
+		if (to_copy)
+			specs->precision = ft_atoi(ft_strsub(env->format, save, to_copy));
+		else
+			specs->precision = 0;
 	}
 }
 
