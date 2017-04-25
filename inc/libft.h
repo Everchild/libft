@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/07 12:38:58 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/25 16:12:57 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,7 @@ void				ft_strrev(char **s);
 char				*ft_itoa_base(unsigned long long n, unsigned char base);
 void				ft_strupper(char **s);
 char				*ft_strjoinf(char *s1, char *s2, int which);
+char				*ft_wstrtostr(wchar_t *wstr);
 
 /*
 ** libtab

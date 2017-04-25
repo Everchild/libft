@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:42 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/07 12:49:00 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/25 15:59:23 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void			handle_specs(t_prf *env)
 		apply_opt(env);
 		buff_handler(&env->buff, FILL, env->cur_specs->result);
 		env->len_result += ft_strlen(env->cur_specs->result);
-		ft_strdel(&env->cur_specs->result);
+	//	ft_strdel(&env->cur_specs->result);
 	}
 	else
 	{

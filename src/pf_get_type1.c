@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:05:37 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/07 17:04:19 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/04/25 16:13:16 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ void				treat_wchar(t_prf *env, char **result)
 	wchar_t			to_format;
 
 	to_format = va_arg(env->args, wchar_t);
-	*result = ft_strdup("(wide char)");
-	to_format++;
+	*result = ft_wstrtostr(&to_format);
 }
 
 void				treat_wcharp(t_prf *env, char **result)
@@ -73,8 +72,7 @@ void				treat_wcharp(t_prf *env, char **result)
 	wchar_t			*to_format;
 
 	to_format = va_arg(env->args, wchar_t *);
-	*result = ft_strdup("(wide char *)");
-	to_format++;
+	*result = ft_wstrtostr(to_format);
 }
 
 void				treat_ptr(t_prf *env, char **result)
@@ -83,7 +81,7 @@ void				treat_ptr(t_prf *env, char **result)
 
 	to_format = va_arg(env->args, unsigned long int);
 	*result = ft_itoa_base(to_format, env->cur_specs->base);
-	*result = ft_strjoinf("0x", *result, 2);
+	*result = ft_strjoin("0x", *result);
 }
 
 void				treat_short(t_prf *env, char **result)
