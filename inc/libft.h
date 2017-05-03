@@ -17,6 +17,7 @@
 # include <stdarg.h>
 # include <limits.h>
 #include <inttypes.h>
+#include <wchar.h>
 #include <stdio.h>
 void				buff_handler(char **buff, int action, char *s);
 
@@ -265,7 +266,7 @@ void				ft_strrev(char **s);
 char				*ft_itoa_base(unsigned long long n, unsigned char base);
 void				ft_strupper(char **s);
 char				*ft_strjoinf(char *s1, char *s2, int which);
-char				*ft_wstrtostr(wchar_t *wstr);
+char				*ft_wctombc(wchar_t c);
 
 /*
 ** libtab

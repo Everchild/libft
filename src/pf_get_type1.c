@@ -64,7 +64,7 @@ void				treat_wchar(t_prf *env, char **result)
 	wchar_t			to_format;
 
 	to_format = va_arg(env->args, wchar_t);
-	*result = ft_wstrtostr(&to_format);
+	*result = ft_wctombc(to_format);
 }
 
 void				treat_wcharp(t_prf *env, char **result)
@@ -72,7 +72,11 @@ void				treat_wcharp(t_prf *env, char **result)
 	wchar_t			*to_format;
 
 	to_format = va_arg(env->args, wchar_t *);
-	*result = ft_wstrtostr(to_format);
+	while (to_format && *to_format)
+	{
+		*result = ft_strjoin(*result, ft_wctombc(*to_format));
+		to_format++;
+	}
 }
 
 void				treat_ptr(t_prf *env, char **result)
