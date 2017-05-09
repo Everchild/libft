@@ -6,7 +6,7 @@
 #    By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/12 18:59:52 by sbrochar          #+#    #+#              #
-#    Updated: 2017/04/25 16:12:54 by sbrochar         ###   ########.fr        #
+#    Updated: 2017/05/09 17:01:20 by sbrochar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ ft_strdel.c ft_strclr.c ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c \
 ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c ft_strcjoin.c ft_strtrim.c \
 ft_strsplit.c ft_itoa.c ft_strrev.c ft_tabdup.c ft_abs.c ft_pow.c ft_exit.c \
 ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_tolower.c \
-ft_toupper.c get_next_line.c \
+ft_toupper.c get_next_line.c ft_wstrlen.c \
 buff_handler.c ft_itoa_base.c ft_strupper.c ft_strjoinf.c ft_wctombc.c
 OBJ = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 

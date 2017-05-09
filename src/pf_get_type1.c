@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:05:37 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/25 16:13:16 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/09 17:04:00 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void				treat_wchar(t_prf *env, char **result)
 
 	to_format = va_arg(env->args, wchar_t);
 	*result = ft_wctombc(to_format);
+	if (!to_format)
+		env->len_result++;
 }
 
 void				treat_wcharp(t_prf *env, char **result)
@@ -72,10 +74,16 @@ void				treat_wcharp(t_prf *env, char **result)
 	wchar_t			*to_format;
 
 	to_format = va_arg(env->args, wchar_t *);
-	while (to_format && *to_format)
+	if (!to_format)
+		*result = ft_strdup("(null)");
+	else
 	{
-		*result = ft_strjoin(*result, ft_wctombc(*to_format));
-		to_format++;
+		*result = (char *)ft_memalloc(sizeof(char) * (ft_wstrlen(to_format) + 1));
+		while (to_format && *to_format)
+		{
+			*result = ft_strcat(*result, ft_wctombc(*to_format));
+			to_format++;
+		}
 	}
 }
 
@@ -85,7 +93,7 @@ void				treat_ptr(t_prf *env, char **result)
 
 	to_format = va_arg(env->args, unsigned long int);
 	*result = ft_itoa_base(to_format, env->cur_specs->base);
-	*result = ft_strjoin("0x", *result);
+	*result = ft_strjoinf("0x", *result, 2);
 }
 
 void				treat_short(t_prf *env, char **result)

@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:32:03 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/25 16:03:33 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/09 16:49:33 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,13 @@ void				opt_on_digit(t_specs *specs, char **result)
 		if ((tmp = ft_strchr(*result, '-')) != 0 && tmp != *result)
 		{
 			*tmp = '0';
-			*result = ft_strjoin("-", *result);
+			*result = ft_strjoinf("-", *result, 2);
 		}
 	}
 	if (specs->flags & PLUS && !ft_strchr(*result, '-'))
-		*result = ft_strjoin("+", *result);
+		*result = ft_strjoinf("+", *result, 2);
 	else if (specs->flags & SPACE && !ft_strchr(*result, '-'))
-		*result = ft_strjoin(" ", *result);
+		*result = ft_strjoinf(" ", *result, 2);
 	orig_len = len = ft_strlen(*result);
 	if (orig_len < specs->field_width)
 		len = specs->field_width;
@@ -155,7 +155,7 @@ void				opt_on_octal(t_specs *specs, char **result)
 	if (!specs->precision && !ft_strcmp("0", *result))
 		**result = '\0';
 	if (specs->flags & HASHTAG && ft_strcmp("0", *result))
-		*result = ft_strjoin("0", *result);
+		*result = ft_strjoinf("0", *result, 2);
 	orig_len = ft_strlen(*result);
 	len = 0;
 	if (orig_len > specs->precision && orig_len > specs->field_width)
@@ -252,7 +252,7 @@ void				opt_on_hexa(t_specs *specs, char **result)
 		*result = tmp;
 	}
 	if (**result && specs->flags & HASHTAG)
-		*result = ft_strjoin("0x", *result);
+		*result = ft_strjoinf("0x", *result, 2);
 	orig_len = len = ft_strlen(*result);
 	if (orig_len < specs->field_width)
 		len = specs->field_width;

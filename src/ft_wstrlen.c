@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoinf.c                                      :+:      :+:    :+:   */
+/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/25 21:40:01 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/09 16:47:24 by sbrochar         ###   ########.fr       */
+/*   Created: 2016/04/12 19:38:50 by sbrochar          #+#    #+#             */
+/*   Updated: 2017/05/09 17:03:54 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char				*ft_strjoinf(char *s1, char *s2, int which)
+size_t				ft_wstrlen(const wchar_t *s)
 {
-	char			*ret;
-	size_t			size;
+	size_t			len;
 
-	ret = NULL;
-	size = 0;
-	if (s1)
-		size += ft_strlen(s1);
-	if (s2)
-		size += ft_strlen(s2);
-	ret = ft_strnew(size);
-	if (ret)
+	len = 0;
+	while (*s)
 	{
-		if (s1)
-			ret = ft_strcpy(ret, s1);
-		if (s2)
-			ret = ft_strcat(ret, s2);
-		if (which == 1 && s1)
-			ft_strdel(&s1);
-		if (which == 2 && s2)
-			ft_strdel(&s2);
-		return (ret);
+		len++;
+		s++;
 	}
-	return (NULL);
+	return (len * 4);
 }
