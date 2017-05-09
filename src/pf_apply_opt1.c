@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:32:03 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/09 16:49:33 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/09 17:54:32 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,15 @@ void				opt_on_char(t_specs *specs, char **result)
 	}
 }
 
-/*void				opt_on_wchar(t_specs *specs, char **result)
+void				opt_on_wchar(t_specs *specs, char **result)
 {
-}*/
+	size_t			size;
+
+	size = ft_strlen(*result);
+	if (specs->field_width > ft_strlen(*result))
+	{
+		tmp = (char *)ft_memalloc(sizeof(char) * (specs->field_width + 1))
+		ft_memset(tmp, ' ', specs->field_width);
+	}
+
+}

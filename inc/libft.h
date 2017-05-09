@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/09 17:02:01 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/09 17:54:55 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef enum		e_format
 	F_UDIGIT, // uU`
 	F_HEXA, // xX
 	F_CHAR, // c
-//	F_WCHAR, // C
+	F_WCHAR, // C
 	F_COUNT
 }					t_format;
 

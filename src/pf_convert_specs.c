@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:36 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/07 18:07:05 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/09 17:49:35 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static t_options	*get_all_formats(void)
 	{ F_OCTAL, "oO", &opt_on_octal },
 	{ F_UDIGIT, "uU", &opt_on_udigit },
 	{ F_HEXA, "xX", &opt_on_hexa },
-	{ F_CHAR, "c", &opt_on_char }/*,
-	{ F_WCHAR, "C", &opt_on_wchar }*/
+	{ F_CHAR, "c", &opt_on_char },
+	{ F_WCHAR, "C", &opt_on_wchar }
 	};
 
 	return (ret);
