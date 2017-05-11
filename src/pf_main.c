@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 17:50:27 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/25 15:56:51 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/11 18:55:47 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void			init_env(t_prf *env, const char *format)
 	env->index = 0;
 	env->buff = (char *)ft_memalloc(sizeof(char) * (BUFF_SIZE + 1));
 	env->len_result = 0;
+	env->null_char = FALSE;
 	env->cur_specs = (t_specs *)ft_memalloc(sizeof(t_specs) * 1);
 }
 

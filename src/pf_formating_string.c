@@ -6,10 +6,11 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:42 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/25 15:59:23 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/11 19:05:16 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <libft.h>
 
 static void			init_specs(t_specs *specs)
@@ -34,8 +35,14 @@ static void			handle_specs(t_prf *env)
 	{
 		apply_opt(env);
 		buff_handler(&env->buff, FILL, env->cur_specs->result);
+		if (env->null_char)
+		{
+			buff_handler(&env->buff, FLUSH, NULL);
+			write(1, "\0", 1);
+			env->null_char = FALSE;
+		}
 		env->len_result += ft_strlen(env->cur_specs->result);
-	//	ft_strdel(&env->cur_specs->result);
+		ft_strdel(&env->cur_specs->result);
 	}
 	else
 	{

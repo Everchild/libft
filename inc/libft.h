@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/09 17:54:55 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/11 18:58:10 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <stdio.h>
 void				buff_handler(char **buff, int action, char *s);
 
-# define BUFF_SIZE 1024
+# define BUFF_SIZE 3
 # define FLUSH 1
 # define FILL 2
 
@@ -43,7 +43,7 @@ typedef enum		e_format
 {
 	F_PERCENT, // %
 	F_STRING, // s
-//	F_WSTRING, // S
+	F_WSTRING, // S
 	F_PTR, // p
 	F_DIGIT, // dDi
 	F_OCTAL, // oO
@@ -104,6 +104,7 @@ typedef struct		s_prf
 	va_list			args;
 	char			*buff;
 	size_t			len_result;
+	t_bool			null_char;
 	t_specs			*cur_specs;
 }					t_prf;
 

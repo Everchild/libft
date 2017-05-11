@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:36 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/09 17:49:35 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/11 17:51:38 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_options	*get_all_formats(void)
 	static t_options	ret[F_COUNT] = {
 	{ F_PERCENT, "%", &opt_on_percent },
 	{ F_STRING, "s", &opt_on_string },
-//	{ F_WSTRING, "S", &opt_on_wstring },
+	{ F_WSTRING, "S", &opt_on_wstring },
 	{ F_PTR, "p", &opt_on_ptr },
 	{ F_DIGIT, "dDi", &opt_on_digit },
 	{ F_OCTAL, "oO", &opt_on_octal },
@@ -36,8 +36,8 @@ static t_conversion	*get_all_funcs(void)
 	{ C_CHAR, "chhdhhi", &treat_char },
 	{ C_CHARP, "s", &treat_charp },
 	{ C_UCHAR, "hhuhhohhxhhX", &treat_uchar },
-	{ C_WCHAR, "lcC", &treat_wchar },
-	{ C_WCHARP, "lsS", &treat_wcharp },
+	{ C_WCHAR, "lcChChhCllCjCzC", &treat_wchar },
+	{ C_WCHARP, "lsShShhSllSjSzS", &treat_wcharp },
 	{ C_PTR, "phhphplpllpjpzp", &treat_ptr },
 	{ C_SHORT, "hdhi", &treat_short },
 	{ C_USHORT, "huhohxhX", &treat_ushort },

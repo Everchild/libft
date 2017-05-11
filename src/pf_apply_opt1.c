@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:32:03 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/09 17:54:32 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/11 19:15:34 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,26 @@ void				opt_on_string(t_specs *specs, char **result)
 	*result = tmp;
 }
 
-/*void				opt_on_wstring(t_specs *specs, char **result)
+void				opt_on_wstring(t_specs *specs, char **result)
 {
-}*/
+	char			*tmp;
+	int				len;
+	int				orig_len;
+
+	orig_len = ft_strlen(*result);
+	if (specs->field_width > orig_len)
+		len = specs->field_width;
+	else
+		len = orig_len;
+	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	ft_memset(tmp, ' ', len);
+	if (specs->flags & MINUS)
+		tmp = ft_strncpy(tmp, *result, orig_len);
+	else
+		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
+	ft_strdel(result);
+	*result = tmp;
+}
 
 void				opt_on_ptr(t_specs *specs, char **result)
 {
@@ -302,13 +319,21 @@ void				opt_on_char(t_specs *specs, char **result)
 
 void				opt_on_wchar(t_specs *specs, char **result)
 {
-	size_t			size;
+	char			*tmp;
+	int				orig_len;
+	int				len;
 
-	size = ft_strlen(*result);
-	if (specs->field_width > ft_strlen(*result))
-	{
-		tmp = (char *)ft_memalloc(sizeof(char) * (specs->field_width + 1))
-		ft_memset(tmp, ' ', specs->field_width);
-	}
-
+	orig_len = ft_strlen(*result);
+	if (specs->field_width > orig_len)
+		len = specs->field_width;
+	else
+		len = orig_len;
+	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	ft_memset(tmp, ' ', len);
+	if (specs->flags & MINUS)
+		tmp = ft_strncpy(tmp, *result, len);
+	else	
+		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
+	ft_strdel(result);
+	*result = tmp;
 }

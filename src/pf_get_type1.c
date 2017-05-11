@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:05:37 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/09 17:04:00 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/11 19:00:21 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ void				treat_char(t_prf *env, char **result)
 		*result = (char *)ft_memalloc(sizeof(char) * 2);
 		*(result[0]) = to_format;
 		if (!to_format)
+		{
+			env->null_char = TRUE;
 			env->len_result++;
+		}
 	}
 	else
 	{
 		to_format = va_arg(env->args, int);
 		*result = ft_itoa(to_format);
 	}
-		
 }
 
 void				treat_charp(t_prf *env, char **result)
@@ -66,7 +68,10 @@ void				treat_wchar(t_prf *env, char **result)
 	to_format = va_arg(env->args, wchar_t);
 	*result = ft_wctombc(to_format);
 	if (!to_format)
+	{
+		env->null_char = TRUE;
 		env->len_result++;
+	}
 }
 
 void				treat_wcharp(t_prf *env, char **result)
