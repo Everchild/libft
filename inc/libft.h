@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/11 18:58:10 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/12 22:51:07 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <stdio.h>
 void				buff_handler(char **buff, int action, char *s);
 
-# define BUFF_SIZE 3
+# define BUFF_SIZE 1024
 # define FLUSH 1
 # define FILL 2
 
@@ -93,6 +93,7 @@ typedef struct		s_specs
 	int				field_width;
 	int				precision;
 	char			conversion[PRF_LEN_MAX_CONV + 1];
+	char			format;
 	char			*result;
 	unsigned char	base;
 }					t_specs;
@@ -105,6 +106,7 @@ typedef struct		s_prf
 	char			*buff;
 	size_t			len_result;
 	t_bool			null_char;
+	t_bool			unifail;
 	t_specs			*cur_specs;
 }					t_prf;
 
@@ -112,7 +114,7 @@ typedef struct		s_options
 {
 	t_format		format;
 	char			*formats;
-	void			(*apply_opt)(t_specs *, char **);
+	void			(*apply_opt)(t_prf *, t_specs *, char **);
 }					t_options;
 
 typedef struct		s_conversion
@@ -129,6 +131,7 @@ void				get_precision(t_prf *env, t_specs *specs);
 void				get_conversion(t_prf *env, t_specs *specs);
 void				formating_string(t_prf *env);
 t_bool				convert_specs(t_prf *env);
+void				apply_precision(t_specs *specs, char **result);
 void				apply_opt(t_prf *env);
 void				treat_percent(t_prf *env, char **result);
 void				treat_char(t_prf *env, char **result);
@@ -148,16 +151,16 @@ void				treat_ulong_long(t_prf *env, char **result);
 void				treat_intmax_t(t_prf *env, char **result);
 void				treat_uintmax_t(t_prf *env, char **result);
 void				treat_size_t(t_prf *env, char **result);
-void				opt_on_percent(t_specs *specs, char **result);
-void				opt_on_string(t_specs *specs, char **result);
-void				opt_on_wstring(t_specs *specs, char **result);
-void				opt_on_ptr(t_specs *specs, char **result);
-void				opt_on_digit(t_specs *specs, char **result);
-void				opt_on_octal(t_specs *specs, char **result);
-void				opt_on_udigit(t_specs *specs, char **result);
-void				opt_on_hexa(t_specs *specs, char **result);
-void				opt_on_char(t_specs *specs, char **result);
-void				opt_on_wchar(t_specs *specs, char **result);
+void				opt_on_percent(t_prf *env, t_specs *specs, char **result);
+void				opt_on_string(t_prf *env, t_specs *specs, char **result);
+void				opt_on_wstring(t_prf *env, t_specs *specs, char **result);
+void				opt_on_ptr(t_prf *env, t_specs *specs, char **result);
+void				opt_on_digit(t_prf *env, t_specs *specs, char **result);
+void				opt_on_octal(t_prf *env, t_specs *specs, char **result);
+void				opt_on_udigit(t_prf *env, t_specs *specs, char **result);
+void				opt_on_hexa(t_prf *env, t_specs *specs, char **result);
+void				opt_on_char(t_prf *env, t_specs *specs, char **result);
+void				opt_on_wchar(t_prf *env, t_specs *specs, char **result);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);

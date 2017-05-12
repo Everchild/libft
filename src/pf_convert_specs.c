@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:36 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/11 17:51:38 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/13 01:17:34 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_conversion	*get_all_funcs(void)
 	{ C_ULONG, "luUloOlxlXihUhhUlUllUjUzUhOhhOlOllOjOzO", &treat_ulong },
 	{ C_LONG_LONG, "lldlli", &treat_long_long },
 	{ C_ULONG_LONG, "llullollxllX", &treat_ulong_long },
-	{ C_INTMAX_T, "jdji", &treat_intmax_t },
+	{ C_INTMAX_T, "zdzijdji", &treat_intmax_t },
 	{ C_UINTMAX_T, "jujojxjX", &treat_uintmax_t },
 	{ C_SIZE_T, "zdzizuzozxzX", &treat_size_t }
 	};
@@ -100,7 +100,7 @@ void				apply_opt(t_prf *env)
 	{
 		if (ft_strchr(options[i].formats, format))
 		{
-			options[i].apply_opt(env->cur_specs, &env->cur_specs->result);
+			options[i].apply_opt(env, env->cur_specs, &env->cur_specs->result);
 			break ;
 		}
 		i++;

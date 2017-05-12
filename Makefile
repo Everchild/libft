@@ -6,7 +6,7 @@
 #    By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/12 18:59:52 by sbrochar          #+#    #+#              #
-#    Updated: 2017/05/09 17:01:20 by sbrochar         ###   ########.fr        #
+#    Updated: 2017/05/12 15:43:22 by sbrochar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ_DIR = ./obj
 
 INC = $(INC_DIR)/libft.h
 SRC = pf_main.c pf_formating_string.c pf_get_specs.c pf_convert_specs.c \
-pf_get_type1.c pf_apply_opt1.c \
+pf_get_type1.c pf_apply_opt1.c pf_apply_precision.c \
 \
 ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c \
 ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c create_list.c create_node.c \

@@ -6,334 +6,303 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:32:03 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/11 19:15:34 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/13 01:43:12 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <libft.h>
 
-void				opt_on_percent(t_specs *specs, char **result)
+void				opt_on_percent(t_prf *env, t_specs *specs, char **orig_s)
 {
-	char			*tmp;
+	char			*result;
 	char			to_fill;
 
 	to_fill = ' ';
 	if (specs->field_width > 0)
 	{
-		tmp = (char *)ft_memalloc(sizeof(char) * (specs->field_width) + 1);
+		result = (char *)ft_memalloc(sizeof(char) * (specs->field_width) + 1);
 		if (specs->flags & ZERO)
 			to_fill = '0';
-		ft_memset(tmp, to_fill, specs->field_width);
+		ft_memset(result, to_fill, specs->field_width);
 		if (specs->flags & MINUS)
-			tmp[0] = '%';
+			result[0] = '%';
 		else
-			tmp[specs->field_width - 1] = '%';
-		ft_strdel(result);
-		*result = tmp;
+			result[specs->field_width - 1] = '%';
 	}
-}
-
-void				opt_on_string(t_specs *specs, char **result)
-{
-	char			*tmp;
-	int				len;
-
-	tmp = NULL;
-	len = ft_strlen(*result);
-	if (specs->precision > len)
-		specs->precision = len;
-	else if (specs->precision >= 0)
-		len = specs->precision;
-	if (len < specs->field_width)
-		len = specs->field_width;
-	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
-	ft_memset(tmp, ' ', len);
-	if ((specs->flags & MINUS) && specs->precision >= 0)
-		tmp = ft_strncpy(tmp, *result, specs->precision);
-	else if (specs->flags & MINUS)
-		tmp = ft_strncpy(tmp, *result, ft_strlen(*result)); 
-	else if (specs->precision >= 0)
-		ft_strncpy(tmp + (len - specs->precision), *result, specs->precision);
 	else
-		ft_strncpy((tmp + (len - ft_strlen(*result))), *result, ft_strlen(*result));
-	ft_strdel(result);
-	*result = tmp;
+		result = ft_strdup(*orig_s);
+	buff_handler(&env->buff, FILL, result);
+	env->len_result += ft_strlen(result);
+	ft_strdel(orig_s);
+	ft_strdel(&result);
 }
 
-void				opt_on_wstring(t_specs *specs, char **result)
+void				opt_on_string(t_prf *env, t_specs *specs, char **orig_s)
 {
-	char			*tmp;
+	char			*result;
 	int				len;
 	int				orig_len;
+	char			to_fill;
 
-	orig_len = ft_strlen(*result);
-	if (specs->field_width > orig_len)
-		len = specs->field_width;
-	else
-		len = orig_len;
-	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
-	ft_memset(tmp, ' ', len);
+	orig_len = ft_strlen(*orig_s);
+	len = specs->field_width > orig_len ? specs->field_width : orig_len;
+	to_fill = specs->flags & ZERO ? '0' : ' ';
+	result = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	ft_memset(result, to_fill, len);
 	if (specs->flags & MINUS)
-		tmp = ft_strncpy(tmp, *result, orig_len);
+		result = ft_strncpy(result, *orig_s, orig_len); 
 	else
-		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
-	ft_strdel(result);
-	*result = tmp;
+		ft_strncpy(result + (len - orig_len), *orig_s, orig_len);
+	buff_handler(&env->buff, FILL, result);
+	env->len_result += ft_strlen(result);
+	ft_strdel(orig_s);
+	ft_strdel(&result);
 }
 
-void				opt_on_ptr(t_specs *specs, char **result)
+void				opt_on_wstring(t_prf *env, t_specs *specs, char **orig_s)
 {
-	char			*tmp;
+	char			*result;
+	int				len;
+	int				orig_len;
+	char			to_fill;
+
+	orig_len = ft_strlen(*orig_s);
+	len = specs->field_width > orig_len ? specs->field_width : orig_len;
+	to_fill = specs->flags & ZERO ? '0' : ' ';
+	result = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	ft_memset(result, to_fill, len);
+	if (specs->flags & MINUS)
+		result = ft_strncpy(result, *orig_s, orig_len);
+	else
+		ft_strncpy(result + (len - orig_len), *orig_s, orig_len);
+	buff_handler(&env->buff, FILL, result);
+	env->len_result += ft_strlen(result);
+	ft_strdel(orig_s);
+	ft_strdel(&result);
+}
+
+void				opt_on_ptr(t_prf *env, t_specs *specs, char **orig_s)
+{
+	char			*result;
 	size_t			len;
 	int				orig_len;
 
-	orig_len = ft_strlen(*result);
-	len = 0;
-	if (orig_len > specs->field_width)
-		len = orig_len;
-	else
-		len = specs->field_width;
-	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
-	ft_memset(tmp, ' ', len);
+	orig_len = ft_strlen(*orig_s);
+	len = specs->field_width > orig_len ? specs->field_width : orig_len;
+	result = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	ft_memset(result, ' ', len);
 	if (specs->flags & MINUS)
-		tmp = ft_strncpy(tmp, *result, orig_len);
+		result = ft_strncpy(result, *orig_s, orig_len);
 	else
-		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
-	ft_strdel(result);
-	*result = tmp;
+		ft_strncpy(result + (len - orig_len), *orig_s, orig_len);
+	buff_handler(&env->buff, FILL, result);
+	env->len_result += ft_strlen(result);
+	ft_strdel(orig_s);
+	ft_strdel(&result);
 }
 
-void				opt_on_digit(t_specs *specs, char **result)
+void				opt_on_digit(t_prf *env, t_specs *specs, char **orig_s)
 {
-	char			*tmp;
+	char			*result;
 	int 			len;
 	int				orig_len;
 
-	if (!specs->precision && !ft_strcmp("0", *result))
-		**result = '\0';
-	orig_len = ft_strlen(*result);
-	len = orig_len;
-	if (specs->precision > orig_len)
-	{
-		tmp = (char *)ft_memalloc(sizeof(char) * (specs->precision + 1));
-		ft_memset(tmp, '0', specs->precision);
-		ft_strncpy(tmp + (specs->precision - orig_len), *result, orig_len);
-		ft_strdel(result);
-		*result = tmp;
-		if ((tmp = ft_strchr(*result, '-')) != 0 && tmp != *result)
-		{
-			*tmp = '0';
-			*result = ft_strjoinf("-", *result, 2);
-		}
-	}
-	if (specs->flags & PLUS && !ft_strchr(*result, '-'))
-		*result = ft_strjoinf("+", *result, 2);
-	else if (specs->flags & SPACE && !ft_strchr(*result, '-'))
-		*result = ft_strjoinf(" ", *result, 2);
-	orig_len = len = ft_strlen(*result);
-	if (orig_len < specs->field_width)
-		len = specs->field_width;
-	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	if (specs->flags & PLUS && !ft_strchr(*orig_s, '-'))
+		*orig_s = ft_strjoinf("+", *orig_s, 2);
+	else if (specs->flags & SPACE && !ft_strchr(*orig_s, '-'))
+		*orig_s = ft_strjoinf(" ", *orig_s, 2);
+	orig_len = ft_strlen(*orig_s);
+	len = specs->field_width > orig_len ? specs->field_width : orig_len;
+	result = (char *)ft_memalloc(sizeof(char) * (len + 1));
 	if (specs->flags & ZERO && !(specs->flags & MINUS) && specs->precision < 0)
-	{
-		ft_memset(tmp, '0', len);
-	}
+		ft_memset(result, '0', len);
 	else
-		ft_memset(tmp, ' ', len);
+		ft_memset(result, ' ', len);
 	if (specs->flags & MINUS)
-		tmp = ft_strncpy(tmp, *result, orig_len);
+		result = ft_strncpy(result, *orig_s, orig_len);
 	else
-		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
-	if (specs->conversion[ft_strlen(specs->conversion) - 1] == 'X')
-		ft_strupper(&tmp);
-	ft_strdel(result);
-	*result = tmp;
-	if (specs->flags & ZERO)
+		ft_strncpy(result + (len - orig_len), *orig_s, orig_len);
+	ft_strdel(orig_s);
+	if (specs->flags & ZERO && ((*orig_s = ft_strchr(result, '+')) != 0) && result != *orig_s)
 	{
-		if ((tmp = ft_strchr(*result, '+')) != 0 && tmp != *result)
-		{
-			*tmp = '0';
-			**result = '+';
-		}
-		else if ((tmp = ft_strchr(*result, '-')) != 0 && tmp != *result)
-		{
-			*tmp = '0';
-			**result = '-';
-		}
+		**orig_s = '0';
+		*result = '+';
 	}
+	else if (specs->flags & ZERO && ((*orig_s = ft_strchr(result, '-')) != 0) && result != *orig_s)
+	{
+		**orig_s = '0';
+		*result = '-';
+	}
+	else if (specs->flags & ZERO && ((*orig_s = ft_strchr(result, ' ')) != 0) && result != *orig_s && !(specs->flags & MINUS))
+	{
+		**orig_s = '0';
+		*result = ' ';
+	}
+	buff_handler(&env->buff, FILL, result);
+	env->len_result += ft_strlen(result);
+	ft_strdel(&result);
 }
 
-void				opt_on_octal(t_specs *specs, char **result)
+void				opt_on_octal(t_prf *env, t_specs *specs, char **orig_s)
 {
-	char			*tmp;
+	char			*result;
 	size_t			len;
 	int				orig_len;
 
-	if (!specs->precision && !ft_strcmp("0", *result))
-		**result = '\0';
-	if (specs->flags & HASHTAG && ft_strcmp("0", *result))
-		*result = ft_strjoinf("0", *result, 2);
-	orig_len = ft_strlen(*result);
-	len = 0;
-	if (orig_len > specs->precision && orig_len > specs->field_width)
-		len = orig_len;
-	else if (specs->precision > specs->field_width)
-		len = specs->precision;
-	else if (specs->field_width > specs->precision)
-		len = specs->field_width;
-	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	if (specs->flags & HASHTAG && **orig_s != '0')
+		*orig_s = ft_strjoinf("0", *orig_s, 2);
+	orig_len = ft_strlen(*orig_s);
+	len = specs->field_width > orig_len ? specs->field_width : orig_len;
+	result = (char *)ft_memalloc(sizeof(char) * (len + 1));
 	if (specs->flags & ZERO && !(specs->flags & MINUS))
-		ft_memset(tmp, '0', len);
+		ft_memset(result, '0', len);
 	else
-		ft_memset(tmp, ' ', len);
+		ft_memset(result, ' ', len);
 	if (specs->flags & MINUS)
-	{
-		if (specs->precision > 0)
-		{
-			ft_memset(tmp, '0', specs->precision);
-			ft_strncpy(tmp + (specs->precision - orig_len), *result, orig_len);
-		}
-		else
-			tmp = ft_strncpy(tmp, *result, orig_len);
-	}
+		result = ft_strncpy(result, *orig_s, orig_len);
 	else
-	{
-		if (specs->precision > 0)
-			ft_memset(tmp + (len - specs->precision), '0', specs->precision);
-		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
-	}
-	ft_strdel(result);
-	*result = tmp;
+		ft_strncpy(result + (len - orig_len), *orig_s, orig_len);
+	buff_handler(&env->buff, FILL, result);
+	env->len_result += ft_strlen(result);
+	ft_strdel(orig_s);
+	ft_strdel(&result);
 }
 
-void				opt_on_udigit(t_specs *specs, char **result)
+void				opt_on_udigit(t_prf *env, t_specs *specs, char **orig_s)
 {
-	char			*tmp;
+	char			*result;
 	size_t			len;
 	int				orig_len;
 
-	if (!specs->precision && !ft_strcmp("0", *result))
-		**result = '\0';
-	orig_len = ft_strlen(*result);
-	len = 0;
-	if (orig_len > specs->precision && orig_len > specs->field_width)
-		len = orig_len;
-	else if (specs->precision > specs->field_width)
-		len = specs->precision;
-	else if (specs->field_width > specs->precision)
-		len = specs->field_width;
-	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	orig_len = ft_strlen(*orig_s);
+	len = specs->field_width > orig_len ? specs->field_width : orig_len;
+	result = (char *)ft_memalloc(sizeof(char) * (len + 1));
 	if (specs->flags & ZERO && !(specs->flags & MINUS))
-		ft_memset(tmp, '0', len);
+		ft_memset(result, '0', len);
 	else
-		ft_memset(tmp, ' ', len);
+		ft_memset(result, ' ', len);
 	if (specs->flags & MINUS)
-	{
-		if (specs->precision > 0)
-		{
-			ft_memset(tmp, '0', specs->precision);
-			ft_strncpy(tmp + (specs->precision - orig_len), *result, orig_len);
-		}
-		else
-			tmp = ft_strncpy(tmp, *result, orig_len);
-	}
+		result = ft_strncpy(result, *orig_s, orig_len);
 	else
-	{
-		if (specs->precision > 0)
-			ft_memset(tmp + (len - specs->precision), '0', specs->precision);
-		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
-	}
-	ft_strdel(result);
-	*result = tmp;
+		ft_strncpy(result + (len - orig_len), *orig_s, orig_len);
+	buff_handler(&env->buff, FILL, result);
+	env->len_result += ft_strlen(result);
+	ft_strdel(orig_s);
+	ft_strdel(&result);
 }
 
-void				opt_on_hexa(t_specs *specs, char **result)
+void				opt_on_hexa(t_prf *env, t_specs *specs, char **orig_s)
 {
-	char			*tmp;
+	char			*result;
 	int 			len;
 	int				orig_len;
-	char			*tmp2;
 
-	if (!specs->precision && !ft_strcmp("0", *result))
-		**result = '\0';
-	orig_len = ft_strlen(*result);
-	len = orig_len;
-	if (!ft_strcmp(*result, "0") && specs->flags & HASHTAG)
+	if (!ft_strcmp(*orig_s, "0") && specs->flags & HASHTAG)
 		specs->flags &= ~HASHTAG;
-	if (specs->precision > orig_len)
-	{
-		tmp = (char *)ft_memalloc(sizeof(char) * (specs->precision + 1));
-		ft_memset(tmp, '0', specs->precision);
-		ft_strncpy(tmp + (specs->precision - orig_len), *result, orig_len);
-		ft_strdel(result);
-		*result = tmp;
-	}
-	if (**result && specs->flags & HASHTAG)
-		*result = ft_strjoinf("0x", *result, 2);
-	orig_len = len = ft_strlen(*result);
-	if (orig_len < specs->field_width)
-		len = specs->field_width;
-	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	if (**orig_s && specs->flags & HASHTAG)
+		*orig_s = ft_strjoinf("0x", *orig_s, 2);
+	orig_len = ft_strlen(*orig_s);
+	len = specs->field_width > orig_len ? specs->field_width : orig_len;
+	result = (char *)ft_memalloc(sizeof(char) * (len + 1));
 	if (specs->flags & ZERO && !(specs->flags & MINUS) && specs->precision < 0)
-		ft_memset(tmp, '0', len);
+		ft_memset(result, '0', len);
 	else
-		ft_memset(tmp, ' ', len);
+		ft_memset(result, ' ', len);
 	if (specs->flags & MINUS)
-		tmp = ft_strncpy(tmp, *result, orig_len);
+		result = ft_strncpy(result, *orig_s, orig_len);
 	else
-		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
-	if (specs->conversion[ft_strlen(specs->conversion) - 1] == 'X')
-		ft_strupper(&tmp);
-	ft_strdel(result);
-	*result = tmp;
-	if (specs->flags & ZERO)
+		ft_strncpy(result + (len - orig_len), *orig_s, orig_len);
+	if (specs->format == 'X')
+		ft_strupper(&result);
+	ft_strdel(orig_s);
+	if (specs->flags & ZERO && (*orig_s = ft_strchr(result, 'x')) != 0)
 	{
-		if ((tmp2 = ft_strchr(*result, 'x')) != 0)
-		{
-			*tmp2 = '0';
-			tmp[1] = 'x';
-		}
+		**orig_s = '0';
+		result[1] = 'x';
 	}
+	buff_handler(&env->buff, FILL, result);
+	env->len_result += ft_strlen(result);
+	ft_strdel(&result);
 }
 
-void				opt_on_char(t_specs *specs, char **result)
+void				opt_on_char(t_prf *env, t_specs *specs, char **orig_s)
 {
-	char			*tmp;
+	char			*result;
 	char			to_fill;
 
 	to_fill = ' ';
 	if (specs->field_width > 0)
 	{
-		tmp = (char *)ft_memalloc(sizeof(char) * (specs->field_width) + 1);
+		result = (char *)ft_memalloc(sizeof(char) * (specs->field_width) + 1);
 		if (specs->flags & ZERO)
 			to_fill = '0';
-		ft_memset(tmp, to_fill, specs->field_width);
+		ft_memset(result, to_fill, specs->field_width);
 		if (specs->flags & MINUS)
-			tmp[0] = *(result[0]);
+			result[0] = *(orig_s[0]);
 		else
-			tmp[specs->field_width - 1] = *(result[0]);
-		ft_strdel(result);
-		*result = tmp;
+			result[specs->field_width - 1] = *(orig_s[0]);
 	}
+	else
+		result = ft_strdup(*orig_s);
+	if (env->null_char && specs->flags & MINUS)
+	{
+		env->len_result += ft_strlen(result);
+		buff_handler(&env->buff, FLUSH, NULL);
+		write(1, "\0", 1);
+		env->null_char = FALSE;
+	}
+	else if (env->null_char)
+	{
+		env->len_result += ft_strlen(result);
+		buff_handler(&env->buff, FILL, result);
+		buff_handler(&env->buff, FLUSH, NULL);
+		write(1, "\0", 1);
+		env->null_char = FALSE;
+	}
+	else
+	{
+		buff_handler(&env->buff, FILL, result);
+		env->len_result += ft_strlen(result);
+	}
+	ft_strdel(orig_s);
+	ft_strdel(&result);
 }
 
-void				opt_on_wchar(t_specs *specs, char **result)
+void				opt_on_wchar(t_prf *env, t_specs *specs, char **orig_s)
 {
-	char			*tmp;
+	char			*result;
 	int				orig_len;
 	int				len;
 
-	orig_len = ft_strlen(*result);
-	if (specs->field_width > orig_len)
-		len = specs->field_width;
-	else
-		len = orig_len;
-	tmp = (char *)ft_memalloc(sizeof(char) * (len + 1));
-	ft_memset(tmp, ' ', len);
+	orig_len = ft_strlen(*orig_s);
+	len = specs->field_width > orig_len ? specs->field_width : orig_len;
+	result = (char *)ft_memalloc(sizeof(char) * (len + 1));
+	ft_memset(result, ' ', len);
 	if (specs->flags & MINUS)
-		tmp = ft_strncpy(tmp, *result, len);
+		result = ft_strncpy(result, *orig_s, len);
 	else	
-		ft_strncpy(tmp + (len - orig_len), *result, orig_len);
-	ft_strdel(result);
-	*result = tmp;
+		ft_strncpy(result + (len - orig_len), *orig_s, orig_len);
+	if (env->null_char && specs->flags & MINUS)
+	{
+		env->len_result += ft_strlen(result);
+		buff_handler(&env->buff, FLUSH, NULL);
+		write(1, "\0", 1);
+		env->null_char = FALSE;
+	}
+	else if (env->null_char)
+	{
+		env->len_result += ft_strlen(result);
+		buff_handler(&env->buff, FILL, result);
+		buff_handler(&env->buff, FLUSH, NULL);
+		write(1, "\0", 1);
+		env->null_char = FALSE;
+	}
+	else
+	{
+		buff_handler(&env->buff, FILL, result);
+		env->len_result += ft_strlen(result);
+	}
+	ft_strdel(orig_s);
+	ft_strdel(&result);
 }
