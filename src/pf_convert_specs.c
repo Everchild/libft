@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:36 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/13 01:17:34 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/14 19:49:04 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_options	*get_all_formats(void)
 
 	return (ret);
 }
+
 static t_conversion	*get_all_funcs(void)
 {
 	static t_conversion	ret[C_COUNT] = {
@@ -55,50 +56,52 @@ static t_conversion	*get_all_funcs(void)
 	return (ret);
 }
 
-t_bool				convert_specs(t_prf *env)
+static t_bool		find_type(t_prf *env, t_conversion *f)
 {
-	t_conversion	*all_formats;
 	int				i;
 	char			*ptr;
 
 	ptr = NULL;
+	i = 0;
+	while (i < C_COUNT)
+	{
+		if ((ptr = ft_strstr(f[i].conv_list, env->cur_specs->conversion)))
+		{
+			if (!(ptr - 1 && (*(ptr - 1) == 'h' || *(ptr - 1) == 'l'
+				|| *(ptr - 1) == 'j' || *(ptr - 1) == 'z')))
+			{
+				f[i].treat_type(env, &env->cur_specs->result);
+				break ;
+			}
+		}
+		i++;
+	}
+	if (ptr)
+		return (TRUE);
+	return (FALSE);
+}
+
+t_bool				convert_specs(t_prf *env)
+{
+	t_conversion	*all_formats;
+
 	all_formats = get_all_funcs();
 	if (!*(env->cur_specs->conversion))
 		return (FALSE);
 	else
-	{
-		i = 0;
-		while (i < C_COUNT)
-		{
-			if ((ptr = ft_strstr(all_formats[i].conv_list, env->cur_specs->conversion)))
-			{
-				if (!(ptr - 1 && (*(ptr - 1) == 'h' || *(ptr - 1) == 'l'
-					|| *(ptr - 1) == 'j' || *(ptr - 1) == 'z')))
-				{
-					all_formats[i].treat_type(env, &env->cur_specs->result);
-					break ;
-				}
-			}
-			i++;
-		}
-		if (ptr)
-			return (TRUE);
-	}
-	return (FALSE);
+		return (find_type(env, all_formats));
 }
 
 void				apply_opt(t_prf *env)
 {
 	t_options		*options;
 	int				i;
-	char			format;
 
 	options = get_all_formats();
 	i = 0;
-	format = env->cur_specs->conversion[ft_strlen(env->cur_specs->conversion) - 1];
 	while (i < F_COUNT)
 	{
-		if (ft_strchr(options[i].formats, format))
+		if (ft_strchr(options[i].formats, env->cur_specs->format))
 		{
 			options[i].apply_opt(env, env->cur_specs, &env->cur_specs->result);
 			break ;

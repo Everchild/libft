@@ -6,11 +6,11 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:14:03 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/03/17 15:47:13 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/14 20:02:59 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned long long 	ft_abs(long long n)
+unsigned long long	ft_abs(long long n)
 {
 	if (n < 0)
 		return (n *= -1);

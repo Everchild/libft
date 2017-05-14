@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 17:50:27 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/12 23:39:04 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/14 17:59:13 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ int					ft_printf(const char *format, ...)
 	formating_string(&env);
 	va_end(env.args);
 	ft_memdel((void **)&(env.cur_specs));
-//	printf("%s", env.buff);
 	if (env.unifail)
+	{
+		ft_strdel(&(env.buff));
 		return (-1);
+	}
 	ft_putstr(env.buff);
 	ft_strdel(&(env.buff));
 	return (env.len_result);

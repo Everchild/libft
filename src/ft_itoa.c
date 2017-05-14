@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:40:04 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/04/07 19:50:27 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/14 20:13:12 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,30 @@ static size_t		findlen(long long n)
 	return (ret);
 }
 
+static void			do_itoa(long long n, char **ret, size_t len,
+		unsigned long long n_abs)
+{
+	size_t				i;
+
+	i = 0;
+	if (n < 0)
+	{
+		(*ret)[len - 1] = '-';
+		len--;
+	}
+	while (i < len)
+	{
+		(*ret)[i] = (n_abs % 10) + '0';
+		n_abs /= 10;
+		i++;
+	}
+	ft_strrev(ret);
+}
+
 char				*ft_itoa(long long n)
 {
 	char				*ret;
 	size_t				len;
-	size_t				i;
 	unsigned long long	n_abs;
 
 	if (n == LLONG_MIN)
@@ -40,21 +59,9 @@ char				*ft_itoa(long long n)
 	len = findlen(n_abs);
 	len += n < 0 ? 1 : 0;
 	ret = ft_strnew(len);
-	i = 0;
 	if (ret)
 	{
-		if (n < 0)
-		{
-			ret[len - 1] = '-';
-			len--;
-		}
-		while (i < len)
-		{
-			ret[i] = (n_abs % 10) + '0';
-			n_abs /= 10;
-			i++;
-		}
-		ft_strrev(&ret);
+		do_itoa(n, &ret, len, n_abs);
 		return (ret);
 	}
 	return (NULL);

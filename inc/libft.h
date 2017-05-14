@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/12 22:51:07 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/14 18:55:17 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include <string.h>
 # include <stdarg.h>
 # include <limits.h>
-#include <inttypes.h>
-#include <wchar.h>
-#include <stdio.h>
+# include <inttypes.h>
+# include <wchar.h>
+
 void				buff_handler(char **buff, int action, char *s);
 
 # define BUFF_SIZE 1024
@@ -41,39 +41,39 @@ typedef enum		e_bool
 
 typedef enum		e_format
 {
-	F_PERCENT, // %
-	F_STRING, // s
-	F_WSTRING, // S
-	F_PTR, // p
-	F_DIGIT, // dDi
-	F_OCTAL, // oO
-	F_UDIGIT, // uU`
-	F_HEXA, // xX
-	F_CHAR, // c
-	F_WCHAR, // C
+	F_PERCENT,
+	F_STRING,
+	F_WSTRING,
+	F_PTR,
+	F_DIGIT,
+	F_OCTAL,
+	F_UDIGIT,
+	F_HEXA,
+	F_CHAR,
+	F_WCHAR,
 	F_COUNT
 }					t_format;
 
 typedef enum		e_all_conv
 {
-	C_PERCENT, // %
-	C_CHAR, // c hhd hhi
-	C_CHARP, // s
-	C_UCHAR, // hhu hho hhx hhX
-	C_WCHAR, // lc C
-	C_WCHARP, // ls S
-	C_PTR, // p
-	C_SHORT, // hd hi
-	C_USHORT, // hu ho hx hX
-	C_INT, // d i
-	C_UINT, // u o x X
-	C_LONG, // ld li D
-	C_ULONG, // lu U lo O lx lX
-	C_LONG_LONG, // lld lli
-	C_ULONG_LONG, // llu llo llx llX
-	C_INTMAX_T, // jd ji
-	C_UINTMAX_T, // ju jo jx jX
-	C_SIZE_T, // zd zu zo zi zx zX
+	C_PERCENT,
+	C_CHAR,
+	C_CHARP,
+	C_UCHAR,
+	C_WCHAR,
+	C_WCHARP,
+	C_PTR,
+	C_SHORT,
+	C_USHORT,
+	C_INT,
+	C_UINT,
+	C_LONG,
+	C_ULONG,
+	C_LONG_LONG,
+	C_ULONG_LONG,
+	C_INTMAX_T,
+	C_UINTMAX_T,
+	C_SIZE_T,
 	C_COUNT
 }					t_all_conv;
 
@@ -278,7 +278,6 @@ size_t				ft_wstrlen(const wchar_t *s);
 */
 
 char				**ft_tabdup(const char **tab);
-//void				ft_tabdel(char ***tab);
 
 /*
 ** libmath
