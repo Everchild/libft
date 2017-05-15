@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/14 18:55:17 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/15 16:18:32 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putnbrbase_fd(int n, unsigned int base, int fd);
 
 /*
 ** liblist
@@ -236,6 +235,7 @@ void				*ft_realloc(void *ptr, size_t size);
 
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s);
+char				*ft_strndup(const char *s, size_t n);
 char				*ft_strcpy(char *dest, const char *src);
 char				*ft_strncpy(char *dest, const char *src, size_t n);
 char				*ft_strcat(char *dest, const char *src);
@@ -265,7 +265,6 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(long long n);
-char				*ft_strndup(const char *s, size_t n);
 void				ft_strrev(char **s);
 char				*ft_itoa_base(unsigned long long n, unsigned char base);
 void				ft_strupper(char **s);

@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:05:37 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/14 18:51:36 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/15 16:24:28 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,7 @@ void				treat_wchar(t_prf *env, char **result)
 	wchar_t			to_format;
 
 	to_format = va_arg(env->args, wchar_t);
-	if (MB_CUR_MAX == 1 && to_format > 255)
-	{
-		env->unifail = TRUE;
-		*result = ft_strdup("fail!");
-	}
-	else if (MB_CUR_MAX == 1 && to_format > 127 && to_format <= 255)
-	{
-		*result = (char *)ft_memalloc(sizeof(char) * (2));
-		**result = (char)to_format;
-	}
-	else
-		*result = ft_wctombc(to_format);
+	*result = ft_wctombc(to_format);
 	if (!to_format)
 	{
 		env->null_char = TRUE;
@@ -90,16 +79,9 @@ void				treat_wcharp(t_prf *env, char **result)
 		*result = ft_strnew(ft_wstrlen(to_format));
 		while (to_format && *to_format)
 		{
-			if (MB_CUR_MAX == 1 && *to_format > 255)
-				env->unifail = TRUE;
-			else if (MB_CUR_MAX == 1 && *to_format > 127 && *to_format <= 255)
-				*result = ft_strcat(*result, (char*)to_format);
-			else
-			{
-				tmp = ft_wctombc(*to_format);
-				*result = ft_strcat(*result, tmp);
-				ft_strdel(&tmp);
-			}
+			tmp = ft_wctombc(*to_format);
+			*result = ft_strcat(*result, tmp);
+			ft_strdel(&tmp);
 			to_format++;
 		}
 	}
