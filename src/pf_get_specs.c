@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:44:00 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/14 19:56:05 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/16 16:14:09 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void				get_flag(t_prf *env, t_specs *specs)
 	while (env->format && env->format[env->index])
 	{
 		if (env->format[env->index] == '#')
-			specs->flags |= HASHTAG;
+			specs->flags |= PF_HASHTAG;
 		else if (env->format[env->index] == '0')
-			specs->flags |= ZERO;
+			specs->flags |= PF_ZERO;
 		else if (env->format[env->index] == '-')
-			specs->flags |= MINUS;
+			specs->flags |= PF_MINUS;
 		else if (env->format[env->index] == '+')
-			specs->flags |= PLUS;
+			specs->flags |= PF_PLUS;
 		else if (env->format[env->index] == ' ')
-			specs->flags |= SPACE;
+			specs->flags |= PF_SPACE;
 		else
 			break ;
 		env->index++;

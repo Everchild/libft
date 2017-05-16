@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/15 16:18:32 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/05/16 16:12:15 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ typedef enum		e_all_conv
 
 typedef enum		e_flag
 {
-	NO_FLAG = 0,
-	HASHTAG = 1 << 1,
-	ZERO = 1 << 2,
-	MINUS = 1 << 3,
-	PLUS = 1 << 4,
-	SPACE = 1 << 5
+	PF_NO_FLAG = 0,
+	PF_HASHTAG = 1 << 1,
+	PF_ZERO = 1 << 2,
+	PF_MINUS = 1 << 3,
+	PF_PLUS = 1 << 4,
+	PF_SPACE = 1 << 5
 }					t_flag;
 
 typedef struct		s_specs
