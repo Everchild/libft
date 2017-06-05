@@ -6,7 +6,7 @@
 #    By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/12 18:59:52 by sbrochar          #+#    #+#              #
-#    Updated: 2017/05/15 16:31:14 by sbrochar         ###   ########.fr        #
+#    Updated: 2017/06/05 17:58:11 by sbrochar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC = buff_handler.c \
 	  create_node.c \
 	  add_node_end.c \
 	  add_node_start.c \
+	  insert_node.c \
 	  swap_nodes.c \
 	  remove_node.c \
 	  free_list.c \

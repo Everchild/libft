@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/16 16:12:15 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/06/05 17:58:20 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ t_dblist			*create_list(void);
 t_node				*create_node(void *content, size_t size);
 t_node				*add_node_end(t_dblist **list, t_node *node);
 t_node				*add_node_start(t_dblist **list, t_node *node);
+t_node				*insert_node(t_dblist **list, t_node *new, t_node *next);
 void				swap_nodes(t_dblist **list, t_node **n1, t_node **n2);
 void				remove_node(t_dblist **list, t_node *node);
 void				free_list(t_dblist **list);
