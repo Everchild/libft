@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 18:00:17 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/06/05 18:00:37 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/06/16 20:33:36 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@ void				clear_list(t_dblist **list)
 			ft_memdel((void **)&cur);
 			cur = next;
 		}
+		(*list)->start = NULL;
+		(*list)->end = NULL;
+		(*list)->nb_nodes = 0;
 	}
 }
