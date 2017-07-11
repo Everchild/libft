@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/06/14 17:49:57 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/07/11 02:55:55 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void				swap_nodes(t_node **n1, t_node **n2);
 void				remove_node(t_dblist **list, t_node *node);
 void				clear_list(t_dblist **list);
 void				free_list(t_dblist **list);
+void				sort_list(t_dblist **list);
 t_node				*iter_list(t_dblist **list, int (*f)(t_node *));
 
 typedef struct		s_list
