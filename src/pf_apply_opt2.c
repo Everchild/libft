@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/14 19:30:59 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/16 16:19:04 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/07/21 12:13:54 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void			check_null_char(t_prf *env, t_specs *specs, char **result)
 		env->len_result += ft_strlen(*result);
 		buff_handler(&env->buff, FLUSH, NULL);
 		write(1, "\0", 1);
-		env->null_char = FALSE;
+		env->null_char = B_FALSE;
 	}
 	else if (env->null_char)
 	{
@@ -72,7 +72,7 @@ static void			check_null_char(t_prf *env, t_specs *specs, char **result)
 		buff_handler(&env->buff, FILL, *result);
 		buff_handler(&env->buff, FLUSH, NULL);
 		write(1, "\0", 1);
-		env->null_char = FALSE;
+		env->null_char = B_FALSE;
 	}
 	else
 	{

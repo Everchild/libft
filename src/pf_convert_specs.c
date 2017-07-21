@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 13:42:36 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/14 19:49:04 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/07/21 12:12:44 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static t_bool		find_type(t_prf *env, t_conversion *f)
 		i++;
 	}
 	if (ptr)
-		return (TRUE);
-	return (FALSE);
+		return (B_TRUE);
+	return (B_FALSE);
 }
 
 t_bool				convert_specs(t_prf *env)
@@ -87,7 +87,7 @@ t_bool				convert_specs(t_prf *env)
 
 	all_formats = get_all_funcs();
 	if (!*(env->cur_specs->conversion))
-		return (FALSE);
+		return (B_FALSE);
 	else
 		return (find_type(env, all_formats));
 }

@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:05:37 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/05/15 16:24:28 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/07/21 12:13:17 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void				treat_char(t_prf *env, char **result)
 		*(result[0]) = to_format;
 		if (!to_format)
 		{
-			env->null_char = TRUE;
+			env->null_char = B_TRUE;
 			env->len_result++;
 		}
 	}
@@ -61,7 +61,7 @@ void				treat_wchar(t_prf *env, char **result)
 	*result = ft_wctombc(to_format);
 	if (!to_format)
 	{
-		env->null_char = TRUE;
+		env->null_char = B_TRUE;
 		env->len_result++;
 	}
 }
