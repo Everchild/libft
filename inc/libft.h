@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/07/11 02:55:55 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/07/21 11:59:31 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void				buff_handler(char **buff, int action, char *s);
 
 typedef enum		e_bool
 {
-	FALSE,
-	TRUE
+	FALSE = 0,
+	TRUE = 1
 }					t_bool;
 
 /*
