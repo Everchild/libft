@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/07/21 12:11:43 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/07/27 08:33:18 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,6 +273,7 @@ char				*ft_itoa_base(unsigned long long n, unsigned char base);
 void				ft_strupper(char **s);
 char				*ft_strjoinf(char *s1, char *s2, int which);
 char				*ft_wctombc(wchar_t c);
+char				*ft_strtrimall(char const *s);
 size_t				ft_wstrlen(const wchar_t *s);
 
 /*
