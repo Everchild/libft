@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 07:45:58 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/07/27 08:42:57 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/08/02 18:23:15 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char				*ft_strtrimall(char const *s)
 	size_t			len;
 
 	len = get_len(s);
-	ft_printf("len: %d\n", len);
 	ret = (char *)ft_memalloc(sizeof(char) * (len + 1));
 	if (ret)
 	{
