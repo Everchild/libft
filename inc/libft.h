@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/07/27 15:36:10 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/08/06 10:55:23 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,7 @@ long int			ft_pow(int n, int pow);
 */
 
 void				ft_exit(char *str, int status);
+char				**listtotab(t_dblist *list);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
