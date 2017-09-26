@@ -6,7 +6,7 @@
 #    By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/12 18:59:52 by sbrochar          #+#    #+#              #
-#    Updated: 2017/08/06 10:55:38 by sbrochar         ###   ########.fr        #
+#    Updated: 2017/09/26 13:36:26 by sbrochar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,6 +114,7 @@ SRC = buff_handler.c \
 	  \
 	  ft_tabdup.c \
 	  free_tab.c \
+	  ft_tabtostr.c \
 	  \
 	  ft_abs.c \
 	  ft_pow.c \

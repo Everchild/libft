@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/08/06 10:55:23 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/09/26 13:37:12 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,7 @@ size_t				ft_wstrlen(const wchar_t *s);
 
 char				**ft_tabdup(const char **tab);
 void				free_tab(char ***s);
+char				*ft_tabtostr(char **tab);
 
 /*
 ** libmath
