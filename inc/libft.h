@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/09/26 13:37:12 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/09/27 16:30:27 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,17 +190,33 @@ typedef struct		s_dblist
 	size_t			nb_nodes;
 }					t_dblist;
 
-t_dblist			*create_list(void);
+typedef struct		s_clist
+{
+	t_node			*start;
+	t_node			*end;
+	size_t			nb_nodes;
+}					t_clist;
+
+t_dblist			*create_dblist(void);
+t_clist				*create_clist(void);
 t_node				*create_node(void *content, size_t size);
-t_node				*add_node_end(t_dblist **list, t_node *node);
-t_node				*add_node_start(t_dblist **list, t_node *node);
-t_node				*insert_node(t_dblist **list, t_node *new, t_node *next);
+t_node				*dbadd_node_end(t_dblist **list, t_node *node);
+t_node				*cadd_node_end(t_clist **list, t_node *node);
+t_node				*dbadd_node_start(t_dblist **list, t_node *node);
+t_node				*cadd_node_start(t_clist **list, t_node *node);
+t_node				*dbinsert_node(t_dblist **list, t_node *new, t_node *next);
+t_node				*cinsert_node(t_clist **list, t_node *new, t_node *next);
 void				swap_nodes(t_node **n1, t_node **n2);
-void				remove_node(t_dblist **list, t_node *node);
-void				clear_list(t_dblist **list);
-void				free_list(t_dblist **list);
-void				sort_list(t_dblist **list);
-t_node				*iter_list(t_dblist **list, int (*f)(t_node *));
+void				dbremove_node(t_dblist **list, t_node *node);
+void				cremove_node(t_clist **list, t_node *node);
+void				clear_dblist(t_dblist **list);
+void				clear_clist(t_clist **list);
+void				free_dblist(t_dblist **list);
+void				free_clist(t_clist **list);
+void				sort_dblist(t_dblist **list);
+void				sort_clist(t_clist **list);
+t_node				*iter_dblist(t_dblist **list, int (*f)(t_node *));
+t_node				*iter_clist(t_clist **list, int (*f)(t_node *));
 
 typedef struct		s_list
 {

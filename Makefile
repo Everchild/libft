@@ -6,7 +6,7 @@
 #    By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/12 18:59:52 by sbrochar          #+#    #+#              #
-#    Updated: 2017/09/26 13:36:26 by sbrochar         ###   ########.fr        #
+#    Updated: 2017/10/05 14:52:35 by sbrochar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,17 +42,26 @@ SRC = buff_handler.c \
 	  ft_putendl_fd.c \
 	  ft_putnbr_fd.c \
 	  \
-	  create_list.c \
+	  create_dblist.c \
+	  create_clist.c \
 	  create_node.c \
-	  add_node_end.c \
-	  add_node_start.c \
-	  insert_node.c \
+	  dbadd_node_end.c \
+	  cadd_node_end.c \
+	  dbadd_node_start.c \
+	  cadd_node_start.c \
+	  dbinsert_node.c \
+	  cinsert_node.c \
 	  swap_nodes.c \
-	  remove_node.c \
-	  clear_list.c \
-	  free_list.c \
-	  sort_list.c \
-	  iter_list.c \
+	  dbremove_node.c \
+	  cremove_node.c \
+	  clear_dblist.c \
+	  clear_clist.c \
+	  free_dblist.c \
+	  free_clist.c \
+	  sort_dblist.c \
+	  sort_clist.c \
+	  iter_dblist.c \
+	  iter_clist.c \
 	  ft_lstnew.c \
 	  ft_lstdelone.c \
 	  ft_lstdel.c \
