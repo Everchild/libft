@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 13:39:05 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/09/26 15:12:56 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/10/17 21:27:34 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char				*ft_tabtostr(char **tab)
 		{
 			ft_strcat(ret, *tab);
 			tmp = ft_strchr(ret, 0);
-			tmp[0] = ' ';
+			tmp[0] = (*tab == NULL) ? '\0' : ' ';
 			tab++;
 		}
 		return (ret);
