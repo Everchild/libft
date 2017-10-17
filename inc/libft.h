@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/09/27 16:30:27 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/10/17 22:16:28 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,7 @@ char				*ft_strjoinf(char *s1, char *s2, int which);
 char				*ft_wctombc(wchar_t c);
 char				*ft_strtrimall(char const *s);
 size_t				ft_wstrlen(const wchar_t *s);
+t_bool				ft_batoi(int *ptr, const char *nptr);
 
 /*
 ** libtab
