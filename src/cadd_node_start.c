@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:41:38 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/10/05 15:53:03 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/10/19 01:11:38 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_node				*cadd_node_start(t_clist **list, t_node *node)
 			(*list)->start = node;
 		}
 		node->prev = (*list)->end;
+		(*list)->end->next = node;
 		(*list)->nb_nodes += 1;
 		return ((*list)->start);
 	}

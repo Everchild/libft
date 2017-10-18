@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:36:57 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/10/18 21:10:56 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/10/19 01:29:36 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static char			*pre_atoi(const char *nptr, int *neg)
 		tmp += 1;
 	while (*tmp == '0')
 		tmp++;
+	tmp = ft_strdup(tmp);
 	ft_strdel(&ret);
 	return (tmp);
 }
@@ -74,6 +75,7 @@ t_bool				ft_batoi(int *ptr, const char *nptr)
 		pow /= 10;
 		i++;
 	}
+	ft_strdel(&n);
 	*ptr = res;
 	return (B_TRUE);
 }
