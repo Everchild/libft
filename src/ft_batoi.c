@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:36:57 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/10/17 22:26:05 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/10/18 21:10:56 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ t_bool				ft_batoi(int *ptr, const char *nptr)
 	n = pre_atoi(nptr, &neg);
 	pow = findpow(n);
 	if (!pow)
-		return (pow);
+	{
+		*ptr = pow;
+		return (B_TRUE);
+	}
 	while (pow >= 1)
 	{
 		res = res + (((n[i] - '0') * pow) * neg);
