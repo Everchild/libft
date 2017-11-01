@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:41:38 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/09/27 15:47:37 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/11/01 16:42:41 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_node				*dbadd_node_start(t_dblist **list, t_node *node)
 		}
 		else
 		{
-			node->next = (*list)->end;
+			node->next = (*list)->start;
 			(*list)->start->prev = node;
 			(*list)->start = node;
 		}
