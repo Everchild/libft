@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/10/17 22:16:28 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/11/11 22:13:18 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,8 +207,8 @@ t_node				*cadd_node_start(t_clist **list, t_node *node);
 t_node				*dbinsert_node(t_dblist **list, t_node *new, t_node *next);
 t_node				*cinsert_node(t_clist **list, t_node *new, t_node *next);
 void				swap_nodes(t_node **n1, t_node **n2);
-void				dbremove_node(t_dblist **list, t_node *node);
-void				cremove_node(t_clist **list, t_node *node);
+void				dbremove_node(t_dblist **list, t_node **node);
+void				cremove_node(t_clist **list, t_node **node);
 void				clear_dblist(t_dblist **list);
 void				clear_clist(t_clist **list);
 void				free_dblist(t_dblist **list);
