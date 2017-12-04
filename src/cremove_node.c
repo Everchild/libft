@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:36:01 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/11/11 22:19:18 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/12/04 17:51:22 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,27 @@
 
 void				cremove_node(t_clist **list, t_node **node)
 {
+	t_node			*to_delete;
+
 	if (list && *list && node && *node)
 	{
+		to_delete = *node;
 		if ((*list)->nb_nodes > 1)
 		{
-			if ((*node) == (*list)->start)
-				(*list)->start = (*node)->next;
-			if ((*node) == (*list)->end)
-				(*list)->end = (*node)->prev;
-			(*node)->prev->next = (*node)->next;
-			(*node)->next->prev = (*node)->prev;
+			if (to_delete == (*list)->start)
+				(*list)->start = to_delete->next;
+			if (to_delete == (*list)->end)
+				(*list)->end = to_delete->prev;
+			to_delete->prev->next = to_delete->next;
+			to_delete->next->prev = to_delete->prev;
 		}
 		else
 		{
 			(*list)->start = NULL;
 			(*list)->end = NULL;
 		}
-		ft_memdel((void **)&(*node)->content);
-		ft_memdel((void **)node);
+		ft_memdel((void **)&(to_delete->content));
+		ft_memdel((void **)&to_delete);
 		(*list)->nb_nodes -= 1;
 	}
 }

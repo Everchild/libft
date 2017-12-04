@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:36:01 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/11/11 22:16:01 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/12/04 17:52:51 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void				dbremove_node(t_dblist **list, t_node **node)
 {
+	t_node			*to_delete;
+
 	if (list && *list && node && *node)
 	{
+		to_delete = *node;
 		if ((*node)->prev)
 			(*node)->prev->next = (*node)->next;
 		if ((*node)->next)
@@ -24,8 +27,8 @@ void				dbremove_node(t_dblist **list, t_node **node)
 			(*list)->start = (*node)->next;
 		if ((*node) == (*list)->end)
 			(*list)->end = (*node)->prev;
-		ft_memdel((void **)&(*node)->content);
-		ft_memdel((void **)node);
+		ft_memdel((void **)&(to_delete->content));
+		ft_memdel((void **)&to_delete);
 		(*list)->nb_nodes -= 1;
 	}
 }
