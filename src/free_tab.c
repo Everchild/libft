@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 14:51:04 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/08/02 09:18:44 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/12/05 19:42:34 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void				free_tab(char ***s)
 		{
 			while ((*s)[i])
 			{
-				ft_strdel(&((*s)[i]));
+				free((*s)[i]);
 				(*s)[i] = NULL;
 				i++;
 			}
-			ft_memdel((void **)*s);
-			**s = NULL;
+			free(*s);
+			*s = NULL;
 		}
 	}
 }
