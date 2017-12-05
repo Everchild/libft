@@ -6,10 +6,11 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 14:51:04 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/12/05 19:42:34 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/12/05 19:44:14 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <libft.h>
 
 void				free_tab(char ***s)
