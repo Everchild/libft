@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:36:57 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/10/19 01:29:36 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/12/12 15:53:36 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ static char			*pre_atoi(const char *nptr, int *neg)
 	return (tmp);
 }
 
+static int			check_pow(long int pow, int *ptr)
+{
+	if (!pow)
+	{
+		*ptr = pow;
+		return (B_TRUE);
+	}
+	return (B_FALSE);
+}
+
 t_bool				ft_batoi(int *ptr, const char *nptr)
 {
 	long int		res;
@@ -62,11 +72,8 @@ t_bool				ft_batoi(int *ptr, const char *nptr)
 	i = 0;
 	n = pre_atoi(nptr, &neg);
 	pow = findpow(n);
-	if (!pow)
-	{
-		*ptr = pow;
+	if (check_pow(pow, ptr))
 		return (B_TRUE);
-	}
 	while (pow >= 1)
 	{
 		res = res + (((n[i] - '0') * pow) * neg);

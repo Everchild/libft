@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 13:39:05 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/10/17 21:29:32 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/12/12 15:50:01 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ size_t				get_size(char **tab)
 {
 	size_t			ret;
 	size_t			nb_str;
-   
+
 	ret = 0;
 	nb_str = 0;
 	if (tab)
