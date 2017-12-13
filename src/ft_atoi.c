@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:36:57 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/10/19 01:31:42 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/12/13 18:06:23 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ int					ft_atoi(const char *nptr)
 	n = pre_atoi(nptr, &neg);
 	pow = findpow(n);
 	if (!pow)
+	{
+		ft_strdel(&n);
 		return (pow);
+	}
 	while (pow >= 1)
 	{
 		ret = ret + (((n[i] - '0') * pow) * neg);
