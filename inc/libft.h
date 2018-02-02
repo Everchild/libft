@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 19:42:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/11/11 22:13:18 by sbrochar         ###   ########.fr       */
+/*   Updated: 2018/02/02 18:33:15 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,6 +331,7 @@ int					ft_tolower(int c);
 # define GNL_READ_ERROR -1
 # define GNL_END_OF_FILE 0
 # define GNL_BUF_HAS_LINE 1
+# define GNL_ER_MALLOC 2
 
 int					get_next_line(const int fd, char **line);
 

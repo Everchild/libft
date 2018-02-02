@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 14:06:18 by sbrochar          #+#    #+#             */
-/*   Updated: 2016/12/08 15:25:50 by sbrochar         ###   ########.fr       */
+/*   Updated: 2018/02/02 18:32:53 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int			process_old_data(char buf[BUFF_SIZE], char **line,
 	if (buf[0])
 	{
 		*line = (char *)ft_memdup(buf, BUFF_SIZE);
+		if (!*line)
+			return (GNL_ER_MALLOC);
 		posline = ft_strnpos(*line, '\n', BUFF_SIZE);
 		posbuf = ft_strnpos(buf, '\n', BUFF_SIZE);
 		if (posline >= 0)
@@ -109,6 +111,8 @@ int					get_next_line(int fd, char **line)
 			ft_bzero(buf, BUFF_SIZE);
 			ft_get_line(&env, line, buf);
 		}
+		else if (buf_state == GNL_ER_MALLOC)
+			return (GNL_READ_ERROR);
 		return (process_buf(&env, buf, line));
 	}
 	return (GNL_READ_ERROR);

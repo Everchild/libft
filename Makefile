@@ -6,7 +6,7 @@
 #    By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/12 18:59:52 by sbrochar          #+#    #+#              #
-#    Updated: 2017/10/17 22:16:25 by sbrochar         ###   ########.fr        #
+#    Updated: 2018/02/02 18:35:16 by sbrochar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,7 +143,7 @@ SRC = buff_handler.c \
 OBJ = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 
 CC = gcc
-CFLAGS = -c -Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS = -g -c -Wall -Wextra -Werror -I$(INC_DIR)
 LD = ar rcs
 
 $(NAME): $(OBJ)
